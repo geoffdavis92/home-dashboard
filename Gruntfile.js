@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 			},
 			sass: {
 				files: ['./sass/**/*.sass'],
-				tasks: ['sass:watch']
+				tasks: ['sass:watch','copy:fonts']
 			},
 			images: {
 				files: ['./images/**/*'],
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 					expand: true,
 					cwd: './pages',
 					src: ['*.html','*.md'],
-					dest: 'app/src/'
+					dest: 'app/'
 				}]
 			},
 			images: {
@@ -42,6 +42,14 @@ module.exports = function(grunt) {
 					cwd: './data',
 					src: ['*'],
 					dest: 'app/src/assets/data'
+				}]
+			},
+			fonts: {
+				files: [{
+					expand: true,
+					cwd: './sass/vendor',
+					src: ['fonts/**/*'],
+					dest: 'app/src/css/'
 				}]
 			}
 		},

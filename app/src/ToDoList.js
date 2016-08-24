@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ToDoListForm from './ToDoList/ToDoListForm';
+import ToDoListItem from './ToDoList/ToDoListItem';
 import './css/components/ToDoList.css';
 
 const sampleData = [
@@ -14,23 +16,32 @@ const sampleData = [
 ]
 
 class ToDoList extends Component {
+	constructor() {
+		super()
+		this.state = {
+			data: sampleData
+		}
+	}
+	formSubmitCallback(newTodoItemValue) {
+		console.log('ToDoList, formSubmitCallback',newTodoItemValue)
+		var newDataState = this.state.data;
+		newDataState.push({title:newTodoItemValue});
+		this.setState({
+			data: newDataState
+		})
+		this.props.ToDoListFormSubmitCallback(newTodoItemValue)
+	}
 	render() {
-		const ToDoItems = sampleData.map(function(el,i,arr) {
+		const ToDoItems = this.state.data.map(function(el,i,arr) {
 			return (
-				<tr>
-					<td className="bb1 border-silver text-left">{el.title}</td>
-				</tr>
+				<ToDoListItem itemTitle={el.title} key={i} nth={i}></ToDoListItem>
 			)
 		})
 		return (
-			<table id="to-do-list" className="table max-w25">
-				<thead>
-					<th className="bb3 border-grey">Title</th>
-				</thead>
-				<tbody>
-					{ToDoItems}
-				</tbody>
-			</table>
+			<ul id="todo-list" className="collection">
+				{ToDoItems}
+				<li id="todo-list-form-wrapper"><ToDoListForm formSubmitCallback={this.formSubmitCallback.bind(this)}/></li>
+			</ul>
 		)
 	}
 }
