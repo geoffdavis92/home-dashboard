@@ -1,0 +1,14 @@
+@import '../parts/mixins'
+@import '../parts/settings'
+
+#grocery-list-wrapper
+	@extend %component-wrapper
+#grocery-list
+	.collection-item
+		transition: .2s text-decoration, .2s font-style, .2s color
+		&.completed
+			$completedColor: color('grey','base')
+			color: $completedColor
+			font-style: italic
+			text-decoration: line-through
+			transition: .2s text-decoration, .2s font-style, .2s color

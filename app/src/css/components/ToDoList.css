@@ -1,3 +1,13 @@
+#todo-list-wrapper {
+  border: 1px solid #999;
+  box-shadow: 0 -1px 7px 1px #fff inset;
+  height: 33vh;
+  overflow-y: scroll;
+}
+#todo-list-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
 #todo-list #todo-list-form {
   padding: 10px;
 }

@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "AAGC,0BAAe;EAEd,OAAO,EAAE,IAAI;;AACb,uCAAY;EACX,UAAU,EAAE,CAAC;;AACb,6CAAK;EACJ,aAAa,EAAE,CAAC;EAChB,UAAU,EAAE,IAAI;EAChB,MAAM,EAAE,GAAG;EACX,aAAa,EAAE,IAAI",
-"sources": ["../../../../sass/components/ToDoList.sass"],
+"mappings": "AAEA,kBAAkB;EACjB,MAAM,EAAE,cAAc;EACtB,UAAU,EAAE,yBAAyB;EACrC,MAAM,EAAE,IAAI;EACZ,UAAU,EAAE,MAAM;;AAClB,qCAAoB;EACnB,OAAO,EAAE,IAAI;;;ACAd,0BAAe;EAEd,OAAO,EAAE,IAAI;;AACb,uCAAY;EACX,UAAU,EAAE,CAAC;;AACb,6CAAK;EACJ,aAAa,EAAE,CAAC;EAChB,UAAU,EAAE,IAAI;EAChB,MAAM,EAAE,GAAG;EACX,aAAa,EAAE,IAAI",
+"sources": ["../../../../sass/parts/settings.sass","../../../../sass/components/ToDoList.sass"],
 "names": [],
 "file": "ToDoList.css"
 }

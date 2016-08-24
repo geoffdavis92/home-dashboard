@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,qBAAkB;EACjB,MAAM,EAAE,cAAc;EACtB,UAAU,EAAE,yBAAyB;EACrC,MAAM,EAAE,IAAI;EACZ,UAAU,EAAE,MAAM;;AAClB,wCAAoB;EACnB,OAAO,EAAE,IAAI;;;ACFd,8BAAgB;EACf,UAAU,EAAE,iDAA8C;;AAC1D,wCAAW;EAEV,KAAK,EADL,OAAoB;EAEpB,UAAU,EAAE,MAAM;EAClB,eAAe,EAAE,YAAY;EAC7B,UAAU,EAAE,iDAA8C",
+"sources": ["../../../../sass/parts/settings.sass","../../../../sass/components/GroceryList.sass"],
+"names": [],
+"file": "GroceryList.css"
+}
