@@ -15,7 +15,6 @@ module.exports = {
 			title: 'Milk',
 			count: '1',
 			unit: 'gallon',
-			priority: 1,
 			isOpen: true
 		}
 	],

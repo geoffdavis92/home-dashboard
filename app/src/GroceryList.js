@@ -1,6 +1,7 @@
 // React
 import React, { Component } from 'react';
-// import GroceryListForm from './GroceryList/GroceryListForm';
+// Components
+import GroceryListForm from './GroceryList/GroceryListForm';
 import GroceryListItem from './GroceryList/GroceryListItem';
 // Placeholder data
 import { groceries } from './placeholder'
@@ -11,14 +12,13 @@ class GroceryList extends Component {
 	constructor() {
 		super();
 		this.state = {
-			openItems: [],
-			completedItems: [],
-			groceryItems: groceries
+			openItems: groceries,
+			completedItems: []
 		};
 	};
 	componentDidMount() {
 		let mountedOpenItems = [];
-		this.state.groceryItems.forEach(function(el,i,arr) {
+		this.state.openItems.forEach(function(el,i,arr) {
 			if ( el.isOpen ) {
 				el['id'] = `grocery-list-item-${i}`;
 				mountedOpenItems.push(el);
@@ -27,12 +27,14 @@ class GroceryList extends Component {
 		this.setState({
 			openItems: mountedOpenItems
 		});
+		this.props.GroceryListUpdateCallback({
+			completedGroceryItems: this.state.completedItems,
+			openGroceryItems: mountedOpenItems
+		});
 	}
 	handleCheckboxChange(itemIsOpen,itemID) {
-		console.log(itemIsOpen,itemID)
 		let updatedCompletedItems = this.state.completedItems,
 			updatedOpenItems = this.state.openItems;
-
 		if ( itemIsOpen ) {
 			let itemToOpen = updatedCompletedItems.filter( completedItem => completedItem.id == itemID )[0];
 			updatedCompletedItems.splice(updatedCompletedItems.indexOf(itemToOpen),1);
@@ -52,10 +54,30 @@ class GroceryList extends Component {
 			completedItems: updatedCompletedItems,
 			openItems: updatedOpenItems
 		});
+
+		this.props.GroceryListUpdateCallback({
+			completedGroceryItems: this.state.completedItems,
+			openGroceryItems: this.state.openItems
+		});
+	}
+	formSubmitCallback(newGroceryListItem) {
+		let updatedOpenItems = this.state.openItems;
+
+		updatedOpenItems.push(newGroceryListItem);
+
+		this.setState({
+			openItems: updatedOpenItems
+		})
+
+		this.props.GroceryListUpdateCallback({
+			completedGroceryItems: this.state.completedItems,
+			openGroceryItems: this.state.openItems
+		});
 	}
 	render() {
 		const _this = this,
-			  GroceryListItems = this.state.groceryItems.map(function(el,i,arr) {
+			  GroceryListItems = this.state.openItems.map(function(el,i,arr) {
+			  	// console.log(el,i)
 				return (
 					<GroceryListItem key={i} id={`grocery-list-item-${i}`} checkboxChangeCallback={_this.handleCheckboxChange.bind(_this)} content={el}/>
 				)
@@ -63,6 +85,9 @@ class GroceryList extends Component {
 		return (
 			<ul className="collection" id="grocery-list">
 				{GroceryListItems}
+				<li id="grocery-list-form-wrapper" className="collection-item">
+					<GroceryListForm formSubmitCallback={this.formSubmitCallback.bind(this)}/>
+				</li>
 			</ul>
 		)
 	}

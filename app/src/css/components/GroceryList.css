@@ -17,5 +17,17 @@
   text-decoration: line-through;
   transition: 0.2s text-decoration, 0.2s font-style, 0.2s color;
 }
+#grocery-list #grocery-list-form-wrapper {
+  padding: 10px;
+}
+#grocery-list #grocery-list-form .input-field {
+  margin-top: 0;
+}
+#grocery-list #grocery-list-form .input-field input {
+  border-bottom: 0;
+  box-shadow: none;
+  height: 1.2em;
+  margin-bottom: 10px;
+}
 
 /*# sourceMappingURL=GroceryList.css.map */

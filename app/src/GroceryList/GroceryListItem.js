@@ -8,7 +8,6 @@ class GroceryListItem extends Component {
 			title: '',
 			count: '',
 			unit: '',
-			priority: -1,
 			isOpen: ''
 		};
 	}
@@ -23,6 +22,7 @@ class GroceryListItem extends Component {
 		});
 	}
 	handleCheckboxChange() {
+		console.log({thisCheckbox: this.Checkbox,thisCollectionItem:this.CollectionItem, thisCollectionItemID: this.CollectionItem.id})
 		if ( this.Checkbox !== null && this.CollectionItem !== null) {
 			if ( this.Checkbox.checked ) {
 				this.CollectionItem.setAttribute('class',`${this.CollectionItem.getAttribute('class')} completed`);
@@ -32,6 +32,7 @@ class GroceryListItem extends Component {
 			this.setState({
 				isOpen: !this.Checkbox.checked
 			});
+			console.log('handleCheckboxChange State ID:',this.state.id)
 			this.props.checkboxChangeCallback(!this.Checkbox.checked,this.state.id);
 		} else {
 			console.error('this.Checkbox or this.CollectionItem are not defined.')
@@ -43,13 +44,13 @@ class GroceryListItem extends Component {
 				{`${this.props.content.title} – ${this.props.content.count} ${this.props.content.unit}`}
 				<span className="secondary-content">
 					<input
-						name="is-complete"
+						name={`is-complete-${this.props.id}`}
 						type="checkbox"
-						id="is-complete"
+						id={`is-complete-${this.props.id}`}
 						onChange={this.handleCheckboxChange.bind(this)}
 						ref={ref=>this.Checkbox=ref}
 					/>
-					<label htmlFor="is-complete">{' '}</label>
+					<label htmlFor={`is-complete-${this.props.id}`}>{' '}</label>
 				</span>
 			</li>
 		)

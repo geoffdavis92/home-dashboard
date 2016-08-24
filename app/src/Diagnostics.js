@@ -9,12 +9,49 @@ class Diagnostics extends Component {
 	constructor() {
 		super();
 		this.state = {
-			data: []
+			categories: [
+				{
+					title: 'Test',
+					open: '6',
+					completed: '2'
+				}
+			]
 		};
 	}
+	componentDidMount() {
+		
+	}
 	render() {
+		const appCategories = this.props.categories.map(function(category,i) {
+			if ( category.title && category.open && category.completed ) {
+				return (
+					<tr key={i}>
+						<td>{category.title}</td>
+						<td className="text-right red-text">{category.open.length}</td>
+						<td className="text-right green-text">{category.completed.length}</td>
+					</tr>
+				)
+			} else {
+				return (
+					<tr key={i}>
+						<td colSpan="3">Loading...</td>
+					</tr>
+				)
+			}
+		})
 		return (
-			<p>Diagnostics Component</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Category</th>
+						<th className="text-right">Open</th>
+						<th className="text-right">Completed</th>
+					</tr>
+				</thead>
+				<tbody>
+					{appCategories}
+				</tbody>
+			</table>
 		)
 	}
 }
