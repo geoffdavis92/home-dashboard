@@ -19,27 +19,74 @@ class ToDoList extends Component {
 	constructor() {
 		super()
 		this.state = {
-			data: sampleData
+			todoItems: sampleData,
+			deleted: []
 		}
 	}
 	formSubmitCallback(newTodoItemValue) {
-		console.log('ToDoList, formSubmitCallback',newTodoItemValue)
-		var newDataState = this.state.data;
-		newDataState.push({title:newTodoItemValue});
+		// console.log('ToDoList, formSubmitCallback',newTodoItemValue)
+		var updatedTodoItems = this.state.todoItems;
+		updatedTodoItems.push({title:newTodoItemValue});
 		this.setState({
-			data: newDataState
+			todoItems: updatedTodoItems
 		})
 		this.props.ToDoListFormSubmitCallback(newTodoItemValue)
 	}
-	render() {
-		const ToDoItems = this.state.data.map(function(el,i,arr) {
-			return (
-				<ToDoListItem itemTitle={el.title} key={i} nth={i}></ToDoListItem>
-			)
+	todoItemDeleteCallback(deletedItemID) {
+		let deletedTodoItems = this.state.deleted,
+			todoItems = this.state.todoItems,
+			todoItemArr = [],
+			deletedItemTitle,
+			deletedItem;
+
+		deletedTodoItems.push({id:deletedItemID});
+		deletedItem = todoItems.forEach(function(el,i,arr) {
+			if ( el.id == deletedItemID ) {
+				deletedItemTitle = el;
+				return i;
+			}
 		})
+
+		todoItems.splice(deletedItem,1);
+
+		this.setState({
+			deleted: deletedTodoItems,
+			todoItems: todoItems
+		});
+
+		console.log(this.state.todoItems)
+
+		if ( this.todoList.length > 0 ) {
+			todoItemArr = [].slice.call(this.todoList.children);
+
+			todoItemArr.forEach(function(el,i) {
+				if ( el.id == deletedItemID ) {
+					console.log('deleting %s',deletedItemID);
+					el.remove();
+				} 
+			});
+		}
+
+		this.props.ToDoListItemDeleteCallback({title:deletedItemTitle,id:deletedItemID})
+
+	}
+	render() {
+		const _this = this, 
+			  ToDoItems = this.state.todoItems.map(function(el,i,arr) {
+			  	return (
+					<ToDoListItem
+						itemTitle={el.title}
+						key={i}
+						nth={i}
+						handleItemDelete={_this.todoItemDeleteCallback.bind(_this)}
+					/>
+				)
+			  });
 		return (
-			<ul id="todo-list" className="collection">
+			<ul id="todo-list" className="collection" ref={ref=>this.todoList=ref}>
+				<li className="collection-item light-blue white-text"><h5>To Do</h5></li>
 				{ToDoItems}
+				<li className="collection-item" id="todo-list-dummy"/>
 				<li id="todo-list-form-wrapper"><ToDoListForm formSubmitCallback={this.formSubmitCallback.bind(this)}/></li>
 			</ul>
 		)

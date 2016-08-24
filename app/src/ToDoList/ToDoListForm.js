@@ -9,7 +9,7 @@ class ToDoListForm extends Component {
 	}
 	handleFormSubmit(e) {
 		e.preventDefault();
-		console.log(this.newTodo)
+		// console.log(this.newTodo)
 		this.props.formSubmitCallback(this.newTodo.value);
 		if (this.tdlForm !== null) {
 			this.tdlForm.reset();

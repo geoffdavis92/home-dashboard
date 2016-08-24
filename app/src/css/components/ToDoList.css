@@ -1,3 +1,15 @@
+#todo-list li.collection-item:first-of-type h5 {
+  margin: 0 auto;
+  text-align: center;
+}
+#todo-list li.collection-item .secondary-content {
+  cursor: pointer;
+}
+#todo-list #todo-list-dummy {
+  border: none;
+  height: 0;
+  padding: 0;
+}
 #todo-list #todo-list-form {
   padding: 10px;
 }
