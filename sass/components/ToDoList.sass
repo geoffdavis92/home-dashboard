@@ -1,11 +1,14 @@
 // ToDoList
 
+@import '../parts/mixins'
+@import '../parts/settings'
+
+#todo-list-wrapper
+	@extend %component-wrapper
 #todo-list
 	li.collection-item
 		&:first-of-type
-			h5
-				margin: 0 auto
-				text-align: center
+			@extend %collection-header
 		.secondary-content
 			cursor: pointer
 	#todo-list-dummy
@@ -20,5 +23,5 @@
 			input
 				border-bottom: 0
 				box-shadow: none
-				height: 1em
+				height: 1.2em
 				margin-bottom: 10px

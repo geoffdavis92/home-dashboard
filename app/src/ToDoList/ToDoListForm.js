@@ -3,14 +3,11 @@ import React, { Component } from 'react';
 class ToDoListForm extends Component {
 	constructor(props,context) {
 		super(props,context);
-		this.state = {
-			data: []
-		};
 	}
 	handleFormSubmit(e) {
 		e.preventDefault();
 		// console.log(this.newTodo)
-		this.props.formSubmitCallback(this.newTodo.value);
+		this.props.formSubmitCallback(this.newTodo.value,null);
 		if (this.tdlForm !== null) {
 			this.tdlForm.reset();
 		}

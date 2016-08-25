@@ -1,7 +1,18 @@
+#todo-list-wrapper {
+  border: 1px solid #999;
+  box-shadow: 0 -1px 7px 1px #fff inset;
+  height: 33vh;
+  overflow-y: scroll;
+}
+#todo-list-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
 #todo-list li.collection-item:first-of-type h5 {
   margin: 0 auto;
   text-align: center;
 }
+
 #todo-list li.collection-item .secondary-content {
   cursor: pointer;
 }
@@ -19,7 +30,7 @@
 #todo-list #todo-list-form .input-field input {
   border-bottom: 0;
   box-shadow: none;
-  height: 1em;
+  height: 1.2em;
   margin-bottom: 10px;
 }
 

@@ -12,7 +12,7 @@ class ToDoListItem extends Component {
 		})
 	}
 	handleItemDelete(e) {
-		this.props.handleItemDelete(this.state.id)
+		this.props.handleItemDelete(this.state.title,this.state.id)
 	}
 	render() {
 		return (
