@@ -25,11 +25,16 @@ class Diagnostics extends Component {
 		// console.log(this.props.categories)
 		const appCategories = this.props.categories.map(function(category,i) {
 			if ( category && category.title && category.open && category.completed ) {
+				let num = { 
+					open: category.open.length,
+					completed: category.completed.length
+				}, per = parseFloat( (100 / (num.open + num.completed)) * num.completed );
 				return (
 					<tr key={i}>
 						<td>{category.title}</td>
 						<td className="text-right red-text">{category.open.length}</td>
 						<td className="text-right green-text">{category.completed.length}</td>
+						<td className="text-right blue-text">{ `${per.toString().substr(0,4)}%` }</td>
 					</tr>
 				)
 			} else {
@@ -47,6 +52,7 @@ class Diagnostics extends Component {
 						<th>Category</th>
 						<th className="text-right">Open</th>
 						<th className="text-right">Completed</th>
+						<th className="text-right">% Completed</th>
 					</tr>
 				</thead>
 				<tbody>
