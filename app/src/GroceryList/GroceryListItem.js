@@ -20,6 +20,10 @@ class GroceryListItem extends Component {
 			priority: this.props.content.priority,
 			isOpen: true
 		});
+		// Prevent checkboxes from re-rendering checked
+		console.log('pre',this.CollectionItem.children[0].children[0].checked)
+		this.CollectionItem.children[0].children[0].checked=false;
+		console.log('post',this.CollectionItem.children[0].children[0].checked)
 	}
 	handleCheckboxChange(e) {
 		const changedListItem = e.target.parentNode.parentNode;
@@ -63,6 +67,7 @@ class GroceryListItem extends Component {
 						id={`is-complete-${this.props.id}`}
 						onChange={this.handleCheckboxChange.bind(this)}
 						ref={ref=>this.Checkbox=ref}
+						checked={false}
 					/>
 					<label htmlFor={`is-complete-${this.props.id}`}>{' '}</label>
 					<a onClick={this.trashItem.bind(this)} className='delete-button'>

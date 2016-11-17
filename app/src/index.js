@@ -27,7 +27,7 @@ class Test extends React.Component {
 }
 
 ReactDOM.render(
-  <Test />,
+  <Dashboard />,
   document.getElementById('root')
 );
 
