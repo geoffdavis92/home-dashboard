@@ -159,7 +159,7 @@ class GroceryList extends Component {
 		console.log(GroceryViewProps)
 		return (
 			<ul className={`collection${this.state.view === 'trash' ? ' view_trash' : this.state.view === 'completed' ? ' view_completed' : ''}`} id="grocery-list">
-				<li className="collection-item light-green white-text">
+				<li className="header collection-item light-green white-text">
 					<h5>Groceries</h5>
 					<aside>
 						<a 
