@@ -80,7 +80,7 @@ class App extends Component {
 	            		</div>
 	            	</section>
 	            	<section className="row">
-		            	<div className="col s4">
+		            	<div className="col s12 m6 l4">
 			            	<div className="row">
 				            	<div id="todo-list-wrapper" className="col s12">
 				            		<ToDoList
@@ -98,7 +98,7 @@ class App extends Component {
 								</div>
 				            </div>
 						</div>
-						<div className="col s8">
+						<div className="col s12 m6 l8">
 							<div className="row">
 								<div id="diagnostics-wrapper" className="col s12">
 									<Diagnostics 

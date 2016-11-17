@@ -8366,6 +8366,11 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   }
 }
 /*# sourceMappingURL=material.css.map */
+body ::-webkit-scrollbar {
+  background-color: transparent;
+  display: none;
+}
+
 .text-left {
   text-align: left;
 }

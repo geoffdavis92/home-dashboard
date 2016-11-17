@@ -22,7 +22,8 @@ class GroceryListItem extends Component {
 		});
 	}
 	handleCheckboxChange(e) {
-		// console.log(e.target.parentNode.parentNode,!this.Checkbox.checked)
+		const changedListItem = e.target.parentNode.parentNode;
+		console.log(changedListItem,this.Checkbox.checked)
 		// if ( this.Checkbox !== null && this.CollectionItem !== null) {
 		// 	if ( this.Checkbox.checked ) {
 		// 		e.target.parentNode.parentNode.setAttribute('class',`${e.target.parentNode.parentNode.getAttribute('class')} completed`);
@@ -33,7 +34,7 @@ class GroceryListItem extends Component {
 		// 		isOpen: !this.Checkbox.checked
 		// 	});
 		// 	e.target.checked = false;
-		// 	this.props.checkboxChangeCallback(!this.Checkbox.checked,this.state.id);
+		this.props.checkboxChangeCallback(!this.Checkbox.checked,this.state.id);
 		// } else {
 		// 	console.error('this.Checkbox or this.CollectionItem are not defined.')
 		// }

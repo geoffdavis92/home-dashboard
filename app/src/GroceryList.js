@@ -33,10 +33,32 @@ class GroceryList extends Component {
 		});
 	}
 	handleCheckboxChange(itemIsOpen,itemID) {
+		const GLCompletedItems = this.state.completedItems,
+			  GLOpenItems = this.state.openItems,
+			  changedItem = {};
+		GLOpenItems.forEach((openItem,index,openItemArray) => {
+			if ( openItem.id === itemID ) {
+				changedItem['id'] = itemID;
+				changedItem['stateIndex'] = index;
+				changedItem['content'] = {
+					count: openItem.count,
+					title: openItem.title,
+					unit: openItem.unit
+				};
+			}
+		});
 		// let updatedCompletedItems = this.state.completedItems,
 		// 	updatedOpenItems = this.state.openItems;
 		// if ( itemIsOpen ) {
-		// 	 console.log(itemID,itemIsOpen)
+		console.log(itemID,itemIsOpen)
+		if ( !itemIsOpen ) {
+			GLCompletedItems.push(changedItem);
+			GLOpenItems.splice(changedItem.stateIndex,1);
+			this.setState({
+				completedItems: GLCompletedItems,
+				openItems: GLOpenItems
+			});
+		}
 		// 	let itemToOpen = updatedCompletedItems.filter( completedItem => completedItem.id === itemID )[0];
 
 		// 	updatedCompletedItems.splice(updatedCompletedItems.indexOf(itemToOpen),1);
@@ -64,10 +86,10 @@ class GroceryList extends Component {
 		// 	openItems: updatedOpenItems
 		// });
 
-		// this.props.GroceryListUpdateCallback({
-		// 	completedGroceryItems: this.state.completedItems,
-		// 	openGroceryItems: this.state.openItems
-		// });
+		this.props.GroceryListUpdateCallback({
+			completedGroceryItems: this.state.completedItems,
+			openGroceryItems: this.state.openItems
+		});
 	}
 	formSubmitCallback(updatedGroceryListItem) {
 		let updatedOpenItems = this.state.openItems;
