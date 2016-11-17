@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // Components
 import GroceryListForm from './GroceryList/GroceryListForm';
 import GroceryListItem from './GroceryList/GroceryListItem';
+import GroceryListCompleted from './GroceryList/GroceryListCompleted';
 import GroceryListTrash from './GroceryList/GroceryListTrash';
 // Placeholder data
 import { groceries } from './placeholder'
@@ -51,14 +52,13 @@ class GroceryList extends Component {
 				};
 			}
 		});
-		console.log(itemID,itemIsOpen)
 		if ( !itemIsOpen ) {
 			GLCompletedItems.push(changedItem);
-			GLTrashedItems.push(changedItem); // remove this, add to handleTrashChange
+			//GLTrashedItems.push(changedItem); // remove this, add to handleTrashChange
 			GLOpenItems.splice(changedItem.stateIndex,1);
 			this.setState({
 				completedItems: GLCompletedItems,
-				trashedItems: GLTrashedItems, // remove ... etc
+				//trashedItems: GLTrashedItems, // remove ... etc
 				openItems: GLOpenItems
 			});
 		}
@@ -68,15 +68,18 @@ class GroceryList extends Component {
 			openGroceryItems: this.state.openItems
 		});
 	}
+	handleEmptyTrash() {
+		this.setState({
+			trashedItems: [],
+			view: 'list'
+		});
+	}
 	formSubmitCallback(updatedGroceryListItem) {
 		let updatedOpenItems = this.state.openItems;
-
 		updatedOpenItems.push(updatedGroceryListItem);
-
 		this.setState({
 			openItems: updatedOpenItems
 		})
-
 		this.props.GroceryListUpdateCallback({
 			completedGroceryItems: this.state.completedItems,
 			openGroceryItems: this.state.openItems
@@ -85,7 +88,11 @@ class GroceryList extends Component {
 	saveGroceryList(e) {
 		this.props.saveGroceryListCallback('test')
 	}
-	showCompletedItems(e) {}
+	showCompletedItems(e) {
+		this.setState({
+			view: 'completed'
+		})
+	}
 	showGroceryList(e) {
 		this.setState({
 			view: 'list'
@@ -111,25 +118,39 @@ class GroceryList extends Component {
 			case 'list':
 				GroceryView = GroceryListItems;
 				break;
+			case 'completed':
+				GroceryView = GroceryListCompleted;
+				GroceryViewProps = {
+					completedItems: this.state.completedItems/*,
+					repopenCallback: this.handleReopen.bind(this)*/
+				}
+				break;
 			case 'trash':
 				GroceryView = GroceryListTrash;
 				GroceryViewProps = {
-					trashedItems: this.state.trashedItems
+					trashedItems: this.state.trashedItems,
+					emptyTrashCallback: this.handleEmptyTrash.bind(this)
 				}
 				break;
 		}
 		return (
-			<ul className={`collection${this.state.view === 'trash' ? ' view_trash' : ''}`} id="grocery-list">
+			<ul className={`collection${this.state.view === 'trash' ? ' view_trash' : this.state.view === 'completed' ? ' view_completed' : ''}`} id="grocery-list">
 				<li className="collection-item light-green white-text">
 					<h5>Groceries</h5>
 					<aside>
-						<a onClick={this.showCompletedItems.bind(this)}>completed</a>
-						<a onClick={this.state.view === 'list' ? this.showTrashedItems.bind(this) : this.showGroceryList.bind(this)}>{this.state.view === 'list' ? 'trash' : 'list'}</a>
+						<a 
+							onClick={this.state.completedItems.length <= 0 ? false : this.state.view !== 'completed' ? this.showCompletedItems.bind(this) : this.showGroceryList.bind(this)}
+							className={this.state.completedItems.length > 0 ? '' : 'view-disabled'}
+						>{this.state.view !== 'completed' ? 'completed' : 'list'}</a>
+						<a 
+							onClick={this.state.trashedItems.length <= 0 ? false : this.state.view !== 'trash' ? this.showTrashedItems.bind(this) : this.showGroceryList.bind(this)}
+							className={this.state.trashedItems.length > 0 ? '' : 'view-disabled'}
+						>{this.state.view !== 'trash' ? 'trash' : 'list'}</a>
 					</aside>
 					{/*<i id="save-grocery-list" className="material-icons" onClick={this.saveGroceryList.bind(this)}>play_for_work</i>*/}
 				</li>
 				{this.state.view === 'list' ? GroceryView : <GroceryView {...GroceryViewProps} />}
-				{this.state.view !== 'trash' ? <li id="grocery-list-form-wrapper" className="collection-item">
+				{this.state.view === 'list' ? <li id="grocery-list-form-wrapper" className="collection-item">
 					<GroceryListForm formSubmitCallback={this.formSubmitCallback.bind(this)}/>
 				</li> : ''}
 			</ul>

@@ -13,7 +13,8 @@ class GroceryListForm extends Component {
 			isOpen: true
 		};
 		this.props.formSubmitCallback(sendObject);
-		this.glForm.reset()
+		this.glForm.reset();
+		this.gliTitle.focus();
 	}
 	render() {
 		return (
