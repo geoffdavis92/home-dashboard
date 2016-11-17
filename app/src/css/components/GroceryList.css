@@ -8,7 +8,7 @@
   display: none;
 }
 
-#grocery-list .collection-item:first-of-type h5 {
+#grocery-list .collection-item.header h5 {
   margin: 0 auto;
   text-align: left;
 }
@@ -35,34 +35,34 @@
 #grocery-list .collection-item {
   transition: 0.2s text-decoration, 0.2s font-style, 0.2s color;
 }
-#grocery-list .collection-item:first-of-type h5, #grocery-list .collection-item:first-of-type i, #grocery-list .collection-item:first-of-type aside {
+#grocery-list .collection-item.header h5, #grocery-list .collection-item.header i, #grocery-list .collection-item.header aside {
   vertical-align: middle;
 }
-#grocery-list .collection-item:first-of-type h5 {
+#grocery-list .collection-item.header h5 {
   display: inline-block;
 }
-#grocery-list .collection-item:first-of-type i {
+#grocery-list .collection-item.header i {
   font-size: 2.25em;
   position: absolute;
   top: 8px;
   right: 8px;
 }
-#grocery-list .collection-item:first-of-type aside {
+#grocery-list .collection-item.header aside {
   font-size: 0.9em;
   position: absolute;
   top: 1.075em;
   right: 1.075em;
   text-align: right;
 }
-#grocery-list .collection-item:first-of-type aside a {
+#grocery-list .collection-item.header aside a {
   color: #fff;
   cursor: pointer;
   text-decoration: underline;
 }
-#grocery-list .collection-item:first-of-type aside a:not(:last-of-type) {
+#grocery-list .collection-item.header aside a:not(:last-of-type) {
   margin-right: 1em;
 }
-#grocery-list .collection-item:first-of-type aside a.view-disabled {
+#grocery-list .collection-item.header aside a.view-disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
