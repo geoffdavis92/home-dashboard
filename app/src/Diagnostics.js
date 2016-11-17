@@ -1,7 +1,7 @@
 // React
 import React, { Component } from 'react';
 // Placeholder data
-import { diagnostics } from './placeholder'
+// import { diagnostics } from './placeholder'
 // CSS
 import './css/components/Diagnostics.css';
 
