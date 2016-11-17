@@ -10,7 +10,7 @@
 
 #todo-list li.collection-item:first-of-type h5 {
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
 }
 
 #todo-list li.collection-item .secondary-content {

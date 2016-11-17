@@ -40,7 +40,7 @@ class GroceryListItem extends Component {
 		// }
 	}
 	render() {
-		console.log(this.props)
+		// console.log(this.props)
 		return (
 			<li id={this.props.id} className="collection-item" ref={ref=>this.CollectionItem=ref}>
 				{`${this.props.content.title} – ${this.props.content.count} ${this.props.content.unit}`}

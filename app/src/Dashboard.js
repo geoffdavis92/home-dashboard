@@ -4,10 +4,8 @@ import React, { Component } from 'react';
 import ToDoList from './ToDoList.js';
 import GroceryList from './GroceryList.js';
 import Diagnostics from './Diagnostics.js';
-// CSS
-import './css/components/App.css';
 
-class App extends Component {
+class Dashboard extends Component {
 	constructor() {
 		super()
 		this.state = {
@@ -114,4 +112,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Dashboard;

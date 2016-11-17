@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // Components
 import GroceryListForm from './GroceryList/GroceryListForm';
 import GroceryListItem from './GroceryList/GroceryListItem';
+import GroceryListTrash from './GroceryList/GroceryListTrash';
 // Placeholder data
 import { groceries } from './placeholder'
 // CSS
@@ -13,7 +14,9 @@ class GroceryList extends Component {
 		super();
 		this.state = {
 			openItems: groceries,
-			completedItems: []
+			completedItems: [],
+			trashedItems: [],
+			view: 'list'
 		};
 	};
 	componentDidMount() {
@@ -34,6 +37,7 @@ class GroceryList extends Component {
 	}
 	handleCheckboxChange(itemIsOpen,itemID) {
 		const GLCompletedItems = this.state.completedItems,
+			  GLTrashedItems = this.state.trashedItems, //remove from this, add to handleTrashChange
 			  GLOpenItems = this.state.openItems,
 			  changedItem = {};
 		GLOpenItems.forEach((openItem,index,openItemArray) => {
@@ -47,44 +51,17 @@ class GroceryList extends Component {
 				};
 			}
 		});
-		// let updatedCompletedItems = this.state.completedItems,
-		// 	updatedOpenItems = this.state.openItems;
-		// if ( itemIsOpen ) {
 		console.log(itemID,itemIsOpen)
 		if ( !itemIsOpen ) {
 			GLCompletedItems.push(changedItem);
+			GLTrashedItems.push(changedItem); // remove this, add to handleTrashChange
 			GLOpenItems.splice(changedItem.stateIndex,1);
 			this.setState({
 				completedItems: GLCompletedItems,
+				trashedItems: GLTrashedItems, // remove ... etc
 				openItems: GLOpenItems
 			});
 		}
-		// 	let itemToOpen = updatedCompletedItems.filter( completedItem => completedItem.id === itemID )[0];
-
-		// 	updatedCompletedItems.splice(updatedCompletedItems.indexOf(itemToOpen),1);
-		// 	updatedOpenItems.push(itemToOpen);
-
-		// } else if ( !itemIsOpen ) {
-		// 	console.log(itemID,!itemIsOpen)
-		// 	let itemToComplete = updatedOpenItems.filter( openItem => openItem.id === itemID )[0];
-
-		// 	updatedOpenItems.splice(updatedOpenItems.indexOf(itemToComplete),1);
-		// 	updatedCompletedItems.push(itemToComplete);
-
-		// } else {
-		// 	console.error('itemIsOpen is undefined or null');
-		// 	console.log('=====')
-		// 	console.log(itemIsOpen,itemID)
-		// 	console.log('=====')
-		// }
-		// // Push state
-		// /**
-		//  * ToDo: adjust state so next item does not auto-check
-		//  */
-		// this.setState({
-		// 	completedItems: updatedCompletedItems,
-		// 	openItems: updatedOpenItems
-		// });
 
 		this.props.GroceryListUpdateCallback({
 			completedGroceryItems: this.state.completedItems,
@@ -108,6 +85,17 @@ class GroceryList extends Component {
 	saveGroceryList(e) {
 		this.props.saveGroceryListCallback('test')
 	}
+	showCompletedItems(e) {}
+	showGroceryList(e) {
+		this.setState({
+			view: 'list'
+		})
+	}
+	showTrashedItems(e) {
+		this.setState({
+			view: 'trash'
+		});
+	}
 	render() {
 		const _this = this,
 			  GroceryListItems = this.state.openItems.map(function(el,i,arr) {
@@ -117,16 +105,33 @@ class GroceryList extends Component {
 					)
 				}
 			  });
+		let GroceryView, 
+			GroceryViewProps;
+		switch (this.state.view) {
+			case 'list':
+				GroceryView = GroceryListItems;
+				break;
+			case 'trash':
+				GroceryView = GroceryListTrash;
+				GroceryViewProps = {
+					trashedItems: this.state.trashedItems
+				}
+				break;
+		}
 		return (
-			<ul className="collection" id="grocery-list">
+			<ul className={`collection${this.state.view === 'trash' ? ' view_trash' : ''}`} id="grocery-list">
 				<li className="collection-item light-green white-text">
 					<h5>Groceries</h5>
-					<i id="save-grocery-list" className="material-icons" onClick={this.saveGroceryList.bind(this)}>play_for_work</i>
+					<aside>
+						<a onClick={this.showCompletedItems.bind(this)}>completed</a>
+						<a onClick={this.state.view === 'list' ? this.showTrashedItems.bind(this) : this.showGroceryList.bind(this)}>{this.state.view === 'list' ? 'trash' : 'list'}</a>
+					</aside>
+					{/*<i id="save-grocery-list" className="material-icons" onClick={this.saveGroceryList.bind(this)}>play_for_work</i>*/}
 				</li>
-				{GroceryListItems}
-				<li id="grocery-list-form-wrapper" className="collection-item">
+				{this.state.view === 'list' ? GroceryView : <GroceryView {...GroceryViewProps} />}
+				{this.state.view !== 'trash' ? <li id="grocery-list-form-wrapper" className="collection-item">
 					<GroceryListForm formSubmitCallback={this.formSubmitCallback.bind(this)}/>
-				</li>
+				</li> : ''}
 			</ul>
 		)
 	}
