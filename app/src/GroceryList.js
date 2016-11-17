@@ -42,6 +42,8 @@ class GroceryList extends Component {
 			  GLOpenItems = this.state.openItems,
 			  changedItem = {};
 		GLOpenItems.forEach((openItem,index,openItemArray) => {
+			console.log('ln45 | openItem: ', openItem)
+			console.log('ln46 | itemID: ', itemID)
 			if ( openItem.id === itemID ) {
 				changedItem['id'] = itemID;
 				changedItem['stateIndex'] = index;
@@ -62,7 +64,6 @@ class GroceryList extends Component {
 				openItems: GLOpenItems
 			});
 		}
-
 		this.props.GroceryListUpdateCallback({
 			completedGroceryItems: this.state.completedItems,
 			openGroceryItems: this.state.openItems
@@ -75,7 +76,7 @@ class GroceryList extends Component {
 		});
 	}
 	formSubmitCallback(updatedGroceryListItem) {
-		let updatedOpenItems = this.state.openItems;
+		const updatedOpenItems = this.state.openItems;
 		updatedOpenItems.push(updatedGroceryListItem);
 		this.setState({
 			openItems: updatedOpenItems
@@ -83,6 +84,27 @@ class GroceryList extends Component {
 		this.props.GroceryListUpdateCallback({
 			completedGroceryItems: this.state.completedItems,
 			openGroceryItems: this.state.openItems
+		});
+	}
+	handleReopen(reopenedItem) {
+		const updatedOpenItems = this.state.openItems,
+			  updatedCompletedItems = this.state.completedItems,
+			  { count, title, unit } = reopenedItem.content;
+		console.log('index of reopenedItem in CompletedItems: ',reopenedItem.stateIndex)
+		updatedCompletedItems.splice(reopenedItem.stateIndex,1);
+		updatedOpenItems.push({
+			count: count,
+			isOpen: true,
+			title: title,
+			unit: unit,
+			id: reopenedItem.id
+		});
+		console.log('updated completed: ',updatedCompletedItems)
+		console.log('updated open: ',updatedOpenItems)
+		console.log('reopened: ',reopenedItem)
+		this.setState({
+			openItems: updatedOpenItems,
+			completedItems: updatedCompletedItems
 		});
 	}
 	saveGroceryList(e) {
@@ -119,10 +141,11 @@ class GroceryList extends Component {
 				GroceryView = GroceryListItems;
 				break;
 			case 'completed':
+				console.log('updating Completed props:',this.state.completedItems)
 				GroceryView = GroceryListCompleted;
 				GroceryViewProps = {
-					completedItems: this.state.completedItems/*,
-					repopenCallback: this.handleReopen.bind(this)*/
+					completedItems: this.state.completedItems,
+					reopenCallback: this.handleReopen.bind(this)
 				}
 				break;
 			case 'trash':
@@ -133,14 +156,15 @@ class GroceryList extends Component {
 				}
 				break;
 		}
+		console.log(GroceryViewProps)
 		return (
 			<ul className={`collection${this.state.view === 'trash' ? ' view_trash' : this.state.view === 'completed' ? ' view_completed' : ''}`} id="grocery-list">
 				<li className="collection-item light-green white-text">
 					<h5>Groceries</h5>
 					<aside>
 						<a 
-							onClick={this.state.completedItems.length <= 0 ? false : this.state.view !== 'completed' ? this.showCompletedItems.bind(this) : this.showGroceryList.bind(this)}
-							className={this.state.completedItems.length > 0 ? '' : 'view-disabled'}
+							onClick={this.state.completedItems.length <= 0 && this.state.view !== 'completed' ? false : this.state.view !== 'completed' ? this.showCompletedItems.bind(this) : this.showGroceryList.bind(this)}
+							className={this.state.completedItems.length <= 0 && this.state.view !== 'completed' ? 'view-disabled' : ''}
 						>{this.state.view !== 'completed' ? 'completed' : 'list'}</a>
 						<a 
 							onClick={this.state.trashedItems.length <= 0 ? false : this.state.view !== 'trash' ? this.showTrashedItems.bind(this) : this.showGroceryList.bind(this)}
