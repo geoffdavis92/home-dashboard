@@ -36,7 +36,7 @@ class Dashboard extends Component {
 		});
 	}
 	handleTDLItemDeletion(completedItemTitle,completedItemID) {
-		console.log(completedItemTitle,completedItemID)
+		// console.log(completedItemTitle,completedItemID)
 		let updatedToDoItemCompleted = this.state.todoItems.completed,
 			updatedToDoItemOpen = this.state.todoItems.open,
 			completedItem = updatedToDoItemOpen.filter(todo => todo.id === completedItemID)[0];

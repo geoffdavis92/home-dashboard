@@ -23,7 +23,7 @@ class GroceryListItem extends Component {
 	}
 	handleCheckboxChange(e) {
 		const changedListItem = e.target.parentNode.parentNode;
-		console.log(changedListItem,this.Checkbox.checked)
+		// console.log(changedListItem,this.Checkbox.checked)
 		// if ( this.Checkbox !== null && this.CollectionItem !== null) {
 		// 	if ( this.Checkbox.checked ) {
 		// 		e.target.parentNode.parentNode.setAttribute('class',`${e.target.parentNode.parentNode.getAttribute('class')} completed`);
@@ -39,6 +39,18 @@ class GroceryListItem extends Component {
 		// 	console.error('this.Checkbox or this.CollectionItem are not defined.')
 		// }
 	}
+	trashItem(e) {
+		const { count, title, unit } = this.props.content;
+		this.props.trashCallback({
+			id: this.props.id,
+			stateIndex: this.props.nth,
+			content: {
+				count,
+				title,
+				unit
+			}
+		},'open')
+	}
 	render() {
 		// console.log(this.props)
 		return (
@@ -53,6 +65,9 @@ class GroceryListItem extends Component {
 						ref={ref=>this.Checkbox=ref}
 					/>
 					<label htmlFor={`is-complete-${this.props.id}`}>{' '}</label>
+					<a onClick={this.trashItem.bind(this)} className='delete-button'>
+						<i className='material-icons'>delete</i>
+					</a>
 				</span>
 			</li>
 		)
