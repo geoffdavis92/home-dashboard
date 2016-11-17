@@ -4,7 +4,7 @@
   "description": "Dashboard to follow tasks resources throughout your home.",
   "main": "app/src/index.js",
   "scripts": {
-    "setup": "bash hasYarn.bash;",
+    "setup": "bash setup.bash;",
     "init": "create-react-app ./app && cd app/src && mkdir css && mv *.css css/ && cd -;",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
