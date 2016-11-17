@@ -8,11 +8,17 @@
 		cursor: pointer
 		&:active
 			color: color('light-green','darken-2')
+	.view-message
+		display: block
+		font-weight: bold
+		margin: .5em auto
+		text-align: center
 	&.view_trash
-		.trash-message
+		.trash-empty
+			color: #fff
+			cursor: pointer
 			display: block
-			font-weight: bold
-			margin: .5em auto
+			padding: .5em 0
 			text-align: center
 	.collection-item
 		&:first-of-type
@@ -38,6 +44,9 @@
 					text-decoration: underline
 					&:not(:last-of-type)
 						margin-right: 1em
+					&.view-disabled
+						cursor: not-allowed
+						opacity: .5
 		transition: .2s text-decoration, .2s font-style, .2s color
 		&.completed
 			$completedColor: color('grey','base')

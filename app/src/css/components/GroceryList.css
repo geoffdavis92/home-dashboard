@@ -19,10 +19,17 @@
 #grocery-list #save-grocery-list:active {
   color: #689f38;
 }
-#grocery-list.view_trash .trash-message {
+#grocery-list .view-message {
   display: block;
   font-weight: bold;
   margin: 0.5em auto;
+  text-align: center;
+}
+#grocery-list.view_trash .trash-empty {
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  padding: 0.5em 0;
   text-align: center;
 }
 #grocery-list .collection-item {
@@ -54,6 +61,10 @@
 }
 #grocery-list .collection-item:first-of-type aside a:not(:last-of-type) {
   margin-right: 1em;
+}
+#grocery-list .collection-item:first-of-type aside a.view-disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 #grocery-list .collection-item.completed {
   color: #9e9e9e;
