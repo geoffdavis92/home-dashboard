@@ -83,7 +83,7 @@
   background-color: #F44336 !important;
 }
 
-.red-text {
+.red-text, .delete-button {
   color: #F44336 !important;
 }
 
@@ -91,7 +91,7 @@
   background-color: #FFEBEE !important;
 }
 
-.red-text.text-lighten-5 {
+.red-text.text-lighten-5, .text-lighten-5.delete-button {
   color: #FFEBEE !important;
 }
 
@@ -99,7 +99,7 @@
   background-color: #FFCDD2 !important;
 }
 
-.red-text.text-lighten-4 {
+.red-text.text-lighten-4, .text-lighten-4.delete-button {
   color: #FFCDD2 !important;
 }
 
@@ -107,7 +107,7 @@
   background-color: #EF9A9A !important;
 }
 
-.red-text.text-lighten-3 {
+.red-text.text-lighten-3, .text-lighten-3.delete-button {
   color: #EF9A9A !important;
 }
 
@@ -115,7 +115,7 @@
   background-color: #E57373 !important;
 }
 
-.red-text.text-lighten-2 {
+.red-text.text-lighten-2, .text-lighten-2.delete-button {
   color: #E57373 !important;
 }
 
@@ -123,7 +123,7 @@
   background-color: #EF5350 !important;
 }
 
-.red-text.text-lighten-1 {
+.red-text.text-lighten-1, .text-lighten-1.delete-button {
   color: #EF5350 !important;
 }
 
@@ -131,7 +131,7 @@
   background-color: #E53935 !important;
 }
 
-.red-text.text-darken-1 {
+.red-text.text-darken-1, .text-darken-1.delete-button {
   color: #E53935 !important;
 }
 
@@ -139,7 +139,7 @@
   background-color: #D32F2F !important;
 }
 
-.red-text.text-darken-2 {
+.red-text.text-darken-2, .text-darken-2.delete-button {
   color: #D32F2F !important;
 }
 
@@ -147,7 +147,7 @@
   background-color: #C62828 !important;
 }
 
-.red-text.text-darken-3 {
+.red-text.text-darken-3, .text-darken-3.delete-button {
   color: #C62828 !important;
 }
 
@@ -155,7 +155,7 @@
   background-color: #B71C1C !important;
 }
 
-.red-text.text-darken-4 {
+.red-text.text-darken-4, .text-darken-4.delete-button {
   color: #B71C1C !important;
 }
 
@@ -163,7 +163,7 @@
   background-color: #FF8A80 !important;
 }
 
-.red-text.text-accent-1 {
+.red-text.text-accent-1, .text-accent-1.delete-button {
   color: #FF8A80 !important;
 }
 
@@ -171,7 +171,7 @@
   background-color: #FF5252 !important;
 }
 
-.red-text.text-accent-2 {
+.red-text.text-accent-2, .text-accent-2.delete-button {
   color: #FF5252 !important;
 }
 
@@ -179,7 +179,7 @@
   background-color: #FF1744 !important;
 }
 
-.red-text.text-accent-3 {
+.red-text.text-accent-3, .text-accent-3.delete-button {
   color: #FF1744 !important;
 }
 
@@ -187,7 +187,7 @@
   background-color: #D50000 !important;
 }
 
-.red-text.text-accent-4 {
+.red-text.text-accent-4, .text-accent-4.delete-button {
   color: #D50000 !important;
 }
 
@@ -8383,9 +8383,17 @@ body ::-webkit-scrollbar {
   text-align: right;
 }
 
-.reopen-button {
+.reopen-button, .delete-button {
   cursor: pointer;
+}
+
+.reopen-button {
   text-decoration: underline;
+}
+
+.delete-button {
+  float: right;
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=critical.css.map */
