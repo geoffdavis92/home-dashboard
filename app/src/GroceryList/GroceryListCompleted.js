@@ -13,11 +13,12 @@ export default class GroceryListCompleted extends Component {
 		let itemID = e.target.parentElement.parentElement.parentElement.id.replace(/\-completed/g,''),
 			reopenedItem;
 		this.state.completedItems.forEach((el,i,arr) => {
-			console.log(el.id, itemID)
+			console.log(el.id,itemID,el.id === itemID)
 			if (el.id === itemID) {
 				reopenedItem = el;
 			}
 		})
+		console.log(reopenedItem)
 		this.props.reopenCallback(reopenedItem,'completed');
 	}
 	trashItem(e) {
@@ -39,7 +40,7 @@ export default class GroceryListCompleted extends Component {
 		const GLC = this,
 			  CompletedItems = this.props.completedItems.map(function(item,i,arr) {
 				return (
-					<li key={i} className='collection-item' id={`grocery-list-completed-item-${i}`}>
+					<li key={i} className='collection-item' id={`${item.title.toLowerCase()}-${item.count}-${item.unit.toLowerCase()}`}>
 						{`${item.title} – ${item.count} ${item.unit}`}
 						<span className='secondary-content'>
 							<a onClick={GLC.reopenItem} className='reopen-button'>

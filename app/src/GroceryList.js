@@ -55,17 +55,17 @@ class GroceryList extends Component {
 		});
 	}
 	handleCheckboxChange(itemIsOpen,itemID) {
-		const GLCompletedItems = this.state.completedItems,
-			  GLTrashedItems = this.state.trashedItems, //remove from this, add to handleTrashChange
-			  GLOpenItems = this.state.openItems;
+		const updatedCompletedItems = this.state.completedItems,
+			  updatedTrashedItems = this.state.trashedItems, //remove from this, add to handleTrashChange
+			  updatedOpenItems = this.state.openItems;
 		let changedItem;
-		GLOpenItems.forEach((openItem,index,openItemArray) => {
-			console.log('=============')
-			console.log('openItemArray',openItemArray)
-			console.log('openItem',openItem)
-			console.log('itemID',itemID)
-			console.log('=============')
+		updatedOpenItems.forEach((openItem,index,openItemArray) => {
 			if ( openItem.id === itemID ) {
+				console.log('=============')
+				console.log('openItemArray',openItemArray)
+				console.log('openItem',openItem)
+				console.log('itemID',itemID)
+				console.log('=============')
 				changedItem = {
 					id: itemID,
 					count: openItem.count,
@@ -82,13 +82,18 @@ class GroceryList extends Component {
 			}
 		});
 		if ( !itemIsOpen ) {
-			GLCompletedItems.push(changedItem);
-			//GLTrashedItems.push(changedItem); // remove this, add to handleTrashChange
-			// FIX THIS: GLOpenItems.splice(changedItem.stateIndex,1);
+			updatedCompletedItems.push(changedItem);
+			//updatedTrashedItems.push(changedItem); // remove this, add to handleTrashChange
+			// FIX THIS: 
+			updatedOpenItems.forEach((el,i,arr) => {
+				if (el.id === itemID) {
+					arr.splice(i,1);
+				}
+			})
 			this.setState({
-				completedItems: GLCompletedItems,
-				//trashedItems: GLTrashedItems, // remove ... etc
-				openItems: GLOpenItems
+				completedItems: updatedCompletedItems,
+				//trashedItems: updatedTrashedItems, // remove ... etc
+				openItems: updatedOpenItems
 			});
 		}
 		this.props.GroceryListUpdateCallback({
@@ -120,8 +125,13 @@ class GroceryList extends Component {
 		console.log(reopenedItem)
 		const updatedComputedItems = this.state[`${location}Items`],
 			  updatedOpenItems = this.state.openItems,
-			  { count, title, unit } = reopenedItem.content;
-		// FIX THIS: updatedComputedItems.splice(reopenedItem.stateIndex,1);
+			  { id, count, title, unit } = reopenedItem;
+		// FIX THIS: 
+		updatedComputedItems.forEach((el,i,arr) => {
+			if (el.id === id) {
+				arr.splice(i,1);
+			}
+		})
 		updatedOpenItems.push({
 			count: count,
 			isOpen: true,

@@ -25,7 +25,7 @@ class GroceryListItem extends Component {
 	}
 	handleCheckboxChange(e) {
 		const changedListItem = e.target.parentNode.parentNode,
-			  computedID = `${this.state.title.toLowerCase()}-${this.state.count}-${this.state.unit.toLowerCase()}`;
+			  computedID = `${this.props.content.title.toLowerCase()}-${this.props.content.count}-${this.props.content.unit.toLowerCase()}`;
 		console.log(computedID)
 		this.props.checkboxChangeCallback(false,computedID);
 		// } else {
@@ -47,7 +47,7 @@ class GroceryListItem extends Component {
 	render() {
 		// console.log(this.props)
 		return (
-			<li id={this.props.id} className="collection-item" ref={ref=>this.CollectionItem=ref}>
+			<li id={`${this.props.content.title.toLowerCase()}-${this.props.content.count}-${this.props.content.unit.toLowerCase()}`} className="collection-item" ref={ref=>this.CollectionItem=ref}>
 				{`${this.props.content.title} – ${this.props.content.count} ${this.props.content.unit}`}
 				<span className="secondary-content">
 					<input
