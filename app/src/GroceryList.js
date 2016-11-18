@@ -31,10 +31,10 @@ class GroceryList extends Component {
 		// this.setState({
 		// 	openItems: mountedOpenItems
 		// });
-		// this.props.GroceryListUpdateCallback({
-		// 	completedGroceryItems: this.state.completedItems,
-		// 	openGroceryItems: mountedOpenItems
-		// });
+		this.props.GroceryListUpdateCallback({
+			completedGroceryItems: this.state.completedItems,
+			openGroceryItems: this.state.openItems
+		});
 	}
 	saveGroceryList(e) {
 		this.props.saveGroceryListCallback('test')
@@ -66,19 +66,13 @@ class GroceryList extends Component {
 				console.log('openItem',openItem)
 				console.log('itemID',itemID)
 				console.log('=============')
+				let { id, count, title, unit } = openItem;
 				changedItem = {
-					id: itemID,
-					count: openItem.count,
-					title: openItem.title,
-					unit: openItem.unit
+					id,
+					count,
+					title,
+					unit
 				}
-				// changedItem['id'] = itemID;
-				// changedItem['stateIndex'] = index;
-				// changedItem['content'] = {
-				// 	count: openItem.count,
-				// 	title: openItem.title,
-				// 	unit: openItem.unit
-				// };
 			}
 		});
 		if ( !itemIsOpen ) {
@@ -179,11 +173,11 @@ class GroceryList extends Component {
 				if ( el ) {
 					return (
 						<GroceryListItem 
-							key={i} 
-							id={`grocery-list-item-${i}`} 
+							key={i}
 							nth={i} 
 							checkboxChangeCallback={_this.handleCheckboxChange.bind(_this)} 
-							trashCallback={_this.handleTrash.bind(_this)} content={el}
+							trashCallback={_this.handleTrash.bind(_this)} 
+							content={el}
 						/>
 					)
 				}

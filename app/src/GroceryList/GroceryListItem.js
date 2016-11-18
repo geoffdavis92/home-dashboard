@@ -14,9 +14,9 @@ class GroceryListItem extends Component {
 	componentDidMount() {
 		this.setState({
 			id: this.props.id,
-			title: this.props.content.title,
+			title: this.props.content.title.toLowerCase(),
 			count: this.props.content.count,
-			unit: this.props.content.unit,
+			unit: this.props.content.unit.toLowerCase(),
 			priority: this.props.content.priority,
 			isOpen: true
 		});
@@ -47,7 +47,7 @@ class GroceryListItem extends Component {
 	render() {
 		// console.log(this.props)
 		return (
-			<li id={`${this.props.content.title.toLowerCase()}-${this.props.content.count}-${this.props.content.unit.toLowerCase()}`} className="collection-item" ref={ref=>this.CollectionItem=ref}>
+			<li id={this.props.id/*`${this.props.content.title}-${this.props.content.count}-${this.props.content.unit}`*/} className="collection-item" ref={ref=>this.CollectionItem=ref}>
 				{`${this.props.content.title} – ${this.props.content.count} ${this.props.content.unit}`}
 				<span className="secondary-content">
 					<input
