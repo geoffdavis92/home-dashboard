@@ -21,31 +21,20 @@ class GroceryList extends Component {
 		};
 	};
 	componentDidMount() {
-		let mountedOpenItems = [];
-		this.state.openItems.forEach(function(el,i,arr) {
-			if ( el.isOpen ) {
-				el['id'] = `grocery-list-item-${i}`;
-				mountedOpenItems.push(el);
-			}
-		});
-		this.setState({
-			openItems: mountedOpenItems
-		});
-		this.props.GroceryListUpdateCallback({
-			completedGroceryItems: this.state.completedItems,
-			openGroceryItems: mountedOpenItems
-		});
-	}
-	formSubmitCallback(updatedGroceryListItem) {
-		const updatedOpenItems = this.state.openItems;
-		updatedOpenItems.push(updatedGroceryListItem);
-		this.setState({
-			openItems: updatedOpenItems
-		})
-		this.props.GroceryListUpdateCallback({
-			completedGroceryItems: this.state.completedItems,
-			openGroceryItems: this.state.openItems
-		});
+		// let mountedOpenItems = [];
+		// this.state.openItems.forEach(function(el,i,arr) {
+		// 	if ( el.isOpen ) {
+		// 		el['id'] = `grocery-list-item-${i}`;
+		// 		mountedOpenItems.push(el);
+		// 	}
+		// });
+		// this.setState({
+		// 	openItems: mountedOpenItems
+		// });
+		// this.props.GroceryListUpdateCallback({
+		// 	completedGroceryItems: this.state.completedItems,
+		// 	openGroceryItems: mountedOpenItems
+		// });
 	}
 	saveGroceryList(e) {
 		this.props.saveGroceryListCallback('test')
@@ -68,23 +57,34 @@ class GroceryList extends Component {
 	handleCheckboxChange(itemIsOpen,itemID) {
 		const GLCompletedItems = this.state.completedItems,
 			  GLTrashedItems = this.state.trashedItems, //remove from this, add to handleTrashChange
-			  GLOpenItems = this.state.openItems,
-			  changedItem = {};
+			  GLOpenItems = this.state.openItems;
+		let changedItem;
 		GLOpenItems.forEach((openItem,index,openItemArray) => {
+			console.log('=============')
+			console.log('openItemArray',openItemArray)
+			console.log('openItem',openItem)
+			console.log('itemID',itemID)
+			console.log('=============')
 			if ( openItem.id === itemID ) {
-				changedItem['id'] = itemID;
-				changedItem['stateIndex'] = index;
-				changedItem['content'] = {
+				changedItem = {
+					id: itemID,
 					count: openItem.count,
 					title: openItem.title,
 					unit: openItem.unit
-				};
+				}
+				// changedItem['id'] = itemID;
+				// changedItem['stateIndex'] = index;
+				// changedItem['content'] = {
+				// 	count: openItem.count,
+				// 	title: openItem.title,
+				// 	unit: openItem.unit
+				// };
 			}
 		});
 		if ( !itemIsOpen ) {
 			GLCompletedItems.push(changedItem);
 			//GLTrashedItems.push(changedItem); // remove this, add to handleTrashChange
-			GLOpenItems.splice(changedItem.stateIndex,1);
+			// FIX THIS: GLOpenItems.splice(changedItem.stateIndex,1);
 			this.setState({
 				completedItems: GLCompletedItems,
 				//trashedItems: GLTrashedItems, // remove ... etc
@@ -102,11 +102,26 @@ class GroceryList extends Component {
 			view: 'list'
 		});
 	}
+	handleFormSubmit(addedGroceryItem) {
+		const updatedOpenItems = this.state.openItems;
+		// addedGroceryItem['id'] = `grocery-list-item-${updatedOpenItems.length-1}`
+		console.log('addedGroceryItem',addedGroceryItem)
+		updatedOpenItems.push(addedGroceryItem);
+		this.setState({
+			openItems: updatedOpenItems
+		})
+		console.log(this.state)
+		this.props.GroceryListUpdateCallback({
+			completedGroceryItems: this.state.completedItems,
+			openGroceryItems: this.state.openItems
+		});
+	}
 	handleReopen(reopenedItem,location) {
+		console.log(reopenedItem)
 		const updatedComputedItems = this.state[`${location}Items`],
 			  updatedOpenItems = this.state.openItems,
 			  { count, title, unit } = reopenedItem.content;
-		updatedComputedItems.splice(reopenedItem.stateIndex,1);
+		// FIX THIS: updatedComputedItems.splice(reopenedItem.stateIndex,1);
 		updatedOpenItems.push({
 			count: count,
 			isOpen: true,
@@ -134,7 +149,7 @@ class GroceryList extends Component {
 		const updatedComputedItems = this.state[`${location}Items`], 
 			  updatedTrashedItems = this.state.trashedItems;
 		updatedTrashedItems.push(trashedItem);
-		updatedComputedItems.splice(trashedItem.stateIndex,1)
+		// FIX THIS: updatedComputedItems.splice(trashedItem.stateIndex,1)
 		if (updatedComputedItems.length > 0) {
 			this.setState({
 				[`${location}Items`]: updatedComputedItems,
@@ -204,7 +219,7 @@ class GroceryList extends Component {
 				</li>
 				{this.state.view === 'list' ? GroceryView : <GroceryView {...GroceryViewProps} />}
 				{this.state.view === 'list' ? <li id="grocery-list-form-wrapper" className="collection-item">
-					<GroceryListForm formSubmitCallback={this.formSubmitCallback.bind(this)}/>
+					<GroceryListForm formSubmitCallback={this.handleFormSubmit.bind(this)}/>
 				</li> : ''}
 			</ul>
 		)

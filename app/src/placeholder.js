@@ -12,6 +12,7 @@ module.exports = {
 	],
 	groceries: [
 		{
+			id: 'milk-1-gallon',
 			title: 'Milk',
 			count: '1',
 			unit: 'gallon',

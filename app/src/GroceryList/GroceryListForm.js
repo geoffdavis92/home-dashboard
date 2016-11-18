@@ -10,6 +10,7 @@ class GroceryListForm extends Component {
 			title: this.gliTitle.value,
 			count: this.gliCount.value,
 			unit: this.gliUnit.value,
+			id: `${this.gliTitle.value.toLowerCase()}-${this.gliCount.value}-${this.gliUnit.value.toLowerCase()}`,
 			isOpen: true
 		};
 		this.props.formSubmitCallback(sendObject);

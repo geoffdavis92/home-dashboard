@@ -21,24 +21,13 @@ class GroceryListItem extends Component {
 			isOpen: true
 		});
 		// Prevent checkboxes from re-rendering checked
-		console.log('pre',this.CollectionItem.children[0].children[0].checked)
 		this.CollectionItem.children[0].children[0].checked=false;
-		console.log('post',this.CollectionItem.children[0].children[0].checked)
 	}
 	handleCheckboxChange(e) {
-		const changedListItem = e.target.parentNode.parentNode;
-		// console.log(changedListItem,this.Checkbox.checked)
-		// if ( this.Checkbox !== null && this.CollectionItem !== null) {
-		// 	if ( this.Checkbox.checked ) {
-		// 		e.target.parentNode.parentNode.setAttribute('class',`${e.target.parentNode.parentNode.getAttribute('class')} completed`);
-		// 	} else {
-		// 		e.target.parentNode.parentNode.setAttribute('class',`${e.target.parentNode.parentNode.getAttribute('class').replace(/\scompleted/g,'')}`);
-		// 	}
-		// 	this.setState({
-		// 		isOpen: !this.Checkbox.checked
-		// 	});
-		// 	e.target.checked = false;
-		this.props.checkboxChangeCallback(!this.Checkbox.checked,this.state.id);
+		const changedListItem = e.target.parentNode.parentNode,
+			  computedID = `${this.state.title.toLowerCase()}-${this.state.count}-${this.state.unit.toLowerCase()}`;
+		console.log(computedID)
+		this.props.checkboxChangeCallback(false,computedID);
 		// } else {
 		// 	console.error('this.Checkbox or this.CollectionItem are not defined.')
 		// }
