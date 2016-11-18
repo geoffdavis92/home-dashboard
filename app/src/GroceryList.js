@@ -21,16 +21,6 @@ class GroceryList extends Component {
 		};
 	};
 	componentDidMount() {
-		// let mountedOpenItems = [];
-		// this.state.openItems.forEach(function(el,i,arr) {
-		// 	if ( el.isOpen ) {
-		// 		el['id'] = `grocery-list-item-${i}`;
-		// 		mountedOpenItems.push(el);
-		// 	}
-		// });
-		// this.setState({
-		// 	openItems: mountedOpenItems
-		// });
 		this.props.GroceryListUpdateCallback({
 			completedGroceryItems: this.state.completedItems,
 			openGroceryItems: this.state.openItems
