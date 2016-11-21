@@ -28,9 +28,9 @@ export default class GroceryListCompleted extends Component {
 		updatedCompletedItems.forEach((el,i,arr) => {
 			if (el.id === itemID) {
 				trashedItem = el;
+				arr.splice(i,1)
 			}
 		});
-		updatedCompletedItems.splice(trashedItem.stateIndex,1)
 		this.setState({
 			completedItems: updatedCompletedItems
 		})

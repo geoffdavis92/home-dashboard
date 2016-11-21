@@ -49,7 +49,9 @@ class GroceryList extends Component {
 			  updatedTrashedItems = this.state.trashedItems, //remove from this, add to handleTrashChange
 			  updatedOpenItems = this.state.openItems;
 		let changedItem;
+		console.log('changed item in List:', itemID)
 		updatedOpenItems.forEach((openItem,index,openItemArray) => {
+			console.log(openItem.id,itemID)
 			if ( openItem.id === itemID ) {
 				console.log('=============')
 				console.log('openItemArray',openItemArray)
@@ -163,15 +165,17 @@ class GroceryList extends Component {
 	}
 	render() {
 		const _this = this,
-			  GroceryListItems = this.state.openItems.map(function(el,i,arr) {
-				if ( el ) {
+			  GroceryListItems = this.state.openItems.map(function(openItem,i,arr) {
+				if ( openItem ) {
+					let { id } = openItem
 					return (
 						<GroceryListItem 
 							key={i}
 							nth={i} 
 							checkboxChangeCallback={_this.handleCheckboxChange.bind(_this)} 
 							trashCallback={_this.handleTrash.bind(_this)} 
-							content={el}
+							content={openItem}
+							id={id}
 						/>
 					)
 				}

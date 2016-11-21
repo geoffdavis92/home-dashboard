@@ -26,7 +26,7 @@ class GroceryListItem extends Component {
 	handleCheckboxChange(e) {
 		const changedListItem = e.target.parentNode.parentNode,
 			  computedID = `${this.props.content.title.toLowerCase()}-${this.props.content.count}-${this.props.content.unit.toLowerCase()}`;
-		console.log(computedID)
+		console.log('checkbox changed in item:',changedListItem)
 		this.props.checkboxChangeCallback(false,computedID);
 		// } else {
 		// 	console.error('this.Checkbox or this.CollectionItem are not defined.')

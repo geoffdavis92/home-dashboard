@@ -17,6 +17,13 @@ module.exports = {
 			count: '1',
 			unit: 'gallon',
 			isOpen: true
+		},
+		{
+			id: 'cereal-1-box',
+			title: 'Cereal',
+			count: '1',
+			unit: 'box',
+			isOpen: true
 		}
 	],
 	diagnostics: []
