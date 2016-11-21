@@ -15,6 +15,7 @@ export default class GroceryListTrash extends Component {
 	reopenItem(e) {
 		let itemID = e.target.parentElement.parentElement.parentElement.id.replace(/\-trash/g,''),
 			  reopenedItem;
+		console.log(itemID)
 		this.state.trashedItems.forEach((el,i,arr) => {
 			if (el.id === itemID) {
 				reopenedItem = el;
@@ -24,10 +25,9 @@ export default class GroceryListTrash extends Component {
 	}
 	render() {
 		const GLT = this,
-			  TrashedItems = this.props.trashedItems.map(function(el,i,arr) {
-				let item = el.content;
+			  TrashedItems = this.props.trashedItems.map(function(item,i,arr) {
 				return (
-					<li key={i} className='collection-item' id={`grocery-list-trash-item-${i}`}>
+					<li key={i} className='collection-item' id={`${item.title.toLowerCase()}-${item.count}-${item.unit.toLowerCase()}`}>
 						{`${item.title} – ${item.count} ${item.unit}`}
 						<span className='secondary-content'>
 							<a onClick={GLT.reopenItem} className='reopen-button'>

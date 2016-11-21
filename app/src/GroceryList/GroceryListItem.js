@@ -35,13 +35,11 @@ class GroceryListItem extends Component {
 	trashItem(e) {
 		const { count, title, unit } = this.props.content;
 		this.props.trashCallback({
-			id: this.props.id,
+			id: `${title.toLowerCase()}-${count}-${unit.toLowerCase()}`,
 			stateIndex: this.props.nth,
-			content: {
-				count,
-				title,
-				unit
-			}
+			count,
+			title,
+			unit
 		},'open')
 	}
 	render() {

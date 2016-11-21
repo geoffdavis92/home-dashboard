@@ -136,14 +136,18 @@ class GroceryList extends Component {
 				view: 'list'
 			});
 		}
-
-		
 	}
 	handleTrash(trashedItem,location) {
 		const updatedComputedItems = this.state[`${location}Items`], 
-			  updatedTrashedItems = this.state.trashedItems;
+			  updatedTrashedItems = this.state.trashedItems,
+			  { id, count, title, unit } = trashedItem;
 		updatedTrashedItems.push(trashedItem);
-		// FIX THIS: updatedComputedItems.splice(trashedItem.stateIndex,1)
+		// FIX THIS: 
+		updatedComputedItems.forEach((item,i,arr) => {
+			if (item.id === id) {
+				arr.splice(i,1)
+			}
+		})
 		if (updatedComputedItems.length > 0) {
 			this.setState({
 				[`${location}Items`]: updatedComputedItems,
