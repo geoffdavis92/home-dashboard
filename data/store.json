@@ -1,0 +1,21 @@
+{
+	"records": [
+		{
+			"meta": {
+				"username": "geoffdavis92"
+			},
+			"data": {
+				"todoList": [],
+				"groceryList": [
+					{
+						"count": 1,
+						"id": "potato-1-pound",
+						"isOpen": true,
+						"title": "Potato",
+						"unit": "pound"
+					}
+				]
+			}
+		}
+	]
+}

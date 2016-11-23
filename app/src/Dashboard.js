@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import ToDoList from './ToDoList.js';
 import GroceryList from './GroceryList.js';
 import Diagnostics from './Diagnostics.js';
+// Utilities
+import get from './utilities/api/get'
 
 class Dashboard extends Component {
 	constructor() {
@@ -19,6 +21,10 @@ class Dashboard extends Component {
 			groceryListItems: {}
 			// }
 		}
+	}
+	componentDidMount() {
+		window.GET = get
+		console.log('GET =',get)
 	}
 	handleTDLFormSubmission(newTodoItemTitle,newTodoItemID) {
 		let updatedToDoItemCompleted = this.state.todoItems.completed,

@@ -7,6 +7,7 @@
     "react-scripts": "0.2.2"
   },
   "dependencies": {
+    "ajax.js": "^0.0.8",
     "jquery": "^3.1.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
@@ -17,7 +18,8 @@
     "serve:build": "cd build; httpster -p 19091; cd -;",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "npm run serve:build",
+    "postbuild": "cp -r api build; cp -r data build",
+    "__postbuild": "npm run serve:build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
