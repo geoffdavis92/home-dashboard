@@ -2,9 +2,9 @@
 module.exports = function(grunt) {
 	grunt.initConfig({
 		watch: {
-			html: {
-				files: ['./pages/*.html'],
-				tasks: ['copy:html']
+			pages: {
+				files: ['./pages/**/*.{html,php}'],
+				tasks: ['copy:pages']
 			},
 			sass: {
 				files: ['./sass/**/*.sass'],
@@ -20,11 +20,11 @@ module.exports = function(grunt) {
 			}
 		},
 		copy: {
-			html: {
+			pages: {
 				files: [{
 					expand: true,
 					cwd: './pages',
-					src: ['*.html','*.md'],
+					src: ['**/*.{html,php}'],
 					dest: 'app/'
 				}]
 			},
@@ -41,7 +41,7 @@ module.exports = function(grunt) {
 					expand: true,
 					cwd: './data',
 					src: ['*'],
-					dest: 'app/src/assets/data'
+					dest: 'app/data'
 				}]
 			},
 			fonts: {
