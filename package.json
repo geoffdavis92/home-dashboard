@@ -4,6 +4,7 @@
   "description": "Dashboard to follow tasks resources throughout your home.",
   "main": "app/src/index.js",
   "scripts": {
+    "build": "cd app; run build; cd build; server php 21012; cd -;",
     "setup": "bash setup.bash;",
     "init": "create-react-app ./app && cd app/src && mkdir css && mv *.css css/ && cd -;",
     "test": "echo \"Error: no test specified\" && exit 1"
