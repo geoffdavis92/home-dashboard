@@ -1,15 +1,19 @@
 // Libraries
 import React, { Component } from 'react';
 // Components
-import ToDoList from './ToDoList.js';
-import GroceryList from './GroceryList.js';
-import Diagnostics from './Diagnostics.js';
+import ToDoList from '../ToDoList.js';
+import GroceryList from '../GroceryList.js';
+import Diagnostics from '../Diagnostics.js';
 // Utilities
-import get from './utilities/api/get'
+import get from '../utilities/api/get'
 
 class Dashboard extends Component {
 	constructor() {
 		super()
+		this.handleTDLFormSubmission = this.handleTDLFormSubmission.bind(this);
+		this.handleTDLItemDeletion = this.handleTDLItemDeletion.bind(this);
+		this.handleGroceryListUpdate = this.handleGroceryListUpdate.bind(this);
+		this.handleGroceryListSave = this.handleGroceryListSave.bind(this);
 		this.state = {
 			// trash: {
 			// ToDoItems: [],
@@ -18,13 +22,16 @@ class Dashboard extends Component {
 				completed: [],
 				open: []
 			},
-			groceryListItems: {}
+			groceryListItems: {
+				title: 'GroceryListItems',
+				completed: [],
+				open: []
+			}
 			// }
 		}
 	}
 	componentDidMount() {
-		window.GET = get
-		console.log('GET =',get)
+		this.props.route.dashboardUpdateCallback(this.state)
 	}
 	handleTDLFormSubmission(newTodoItemTitle,newTodoItemID) {
 		let updatedToDoItemCompleted = this.state.todoItems.completed,
@@ -40,6 +47,7 @@ class Dashboard extends Component {
 				open: updatedToDoItemOpen
 			}
 		});
+		this.props.route.dashboardUpdateCallback(this.state)
 	}
 	handleTDLItemDeletion(completedItemTitle,completedItemID) {
 		// console.log(completedItemTitle,completedItemID)
@@ -60,6 +68,7 @@ class Dashboard extends Component {
 			// 	ToDoItems: [...this.state.trash.ToDoItems,{title:deletedItemTitle,id:deletedItemID}]
 			// }
 		})
+		this.props.route.dashboardUpdateCallback(this.state)
 	}
 	handleGroceryListUpdate(updatedGroceryListState) {
 		const { completedGroceryItems, openGroceryItems } = updatedGroceryListState;
@@ -70,51 +79,44 @@ class Dashboard extends Component {
 				open: openGroceryItems
 			}
 		});
+		this.props.route.dashboardUpdateCallback(this.state)
 	}
 	handleGroceryListSave() {
 		console.log('Save GroceryList')
 	}
     render() {
+    	const { groceries } = this.props.route.appData
         return ( 
-        	<main className="row" >
-        		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-        		<div className="col s12">
-	            	<section className="row">
-	            		<div className="col s12">
-	            			<h3 className="text-center">{'Homebase'}</h3>
-	            		</div>
-	            	</section>
-	            	<section className="row">
-		            	<div className="col s12 m6 l4">
-			            	<div className="row">
-				            	<div id="todo-list-wrapper" className="col s12">
-				            		<ToDoList
-				            			ToDoListFormSubmitCallback={this.handleTDLFormSubmission.bind(this)}
-				            			ToDoListItemDeleteCallback={this.handleTDLItemDeletion.bind(this)}
-				            		/>
-				            	</div>
-			            	</div>
-			            	<div className="row">
-			            		<div id="grocery-list-wrapper" className="col s12">
-									<GroceryList 
-										GroceryListUpdateCallback={this.handleGroceryListUpdate.bind(this)}
-										saveGroceryListCallback={this.handleGroceryListSave.bind(this)}
-									/>
-								</div>
-				            </div>
+        	<section id='view_dashboard' className="row">
+            	<div className="col s12 m6 l4">
+	            	<div className="row">
+		            	<div id="todo-list-wrapper" className="col s12">
+		            		<ToDoList
+		            			ToDoListFormSubmitCallback={this.handleTDLFormSubmission}
+		            			ToDoListItemDeleteCallback={this.handleTDLItemDeletion}
+		            		/>
+		            	</div>
+	            	</div>
+	            	<div className="row">
+	            		<div id="grocery-list-wrapper" className="col s12">
+							<GroceryList 
+								data={groceries}
+								GroceryListUpdateCallback={this.handleGroceryListUpdate}
+								saveGroceryListCallback={this.handleGroceryListSave}
+							/>
 						</div>
-						<div className="col s12 m6 l8">
-							<div className="row">
-								<div id="diagnostics-wrapper" className="col s12">
-									<Diagnostics 
-										categories={[this.state.groceryListItems, this.state.todoItems]}
-									/>
-								</div>
-							</div>
-						</div>
-					</section>
+		            </div>
 				</div>
-            </main>
+				<div className="col s12 m6 l8">
+					<div className="row">
+						<div id="diagnostics-wrapper" className="col s12">
+							<Diagnostics 
+								categories={[this.state.groceryListItems, this.state.todoItems]}
+							/>
+						</div>
+					</div>
+				</div>
+			</section>
         );
     }
 }

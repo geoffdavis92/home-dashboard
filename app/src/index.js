@@ -1,40 +1,94 @@
 // Libraries
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Link } from 'react-router'
+import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router'
 
 // Views
-import Dashboard from './Dashboard';
-import MobileMenu from './MobileMenu';
+import Dashboard from './views/Dashboard';
+import Resources from './views/Resources';
 
-import Dates from './analytics/Dates';
-
+// Global Components
+import Nav from './Nav';
 import './css/critical.css';
 
-class Test extends React.Component {
+// Placeholder Data
+import { groceries, resources } from './placeholder'
+
+class AppRouter extends Component {
 	constructor(props) {
-		super(props);
-		this.state = {output:''}
+		super(props)
+		this.handleAppUpdate = this.handleAppUpdate.bind(this)
+		this.handleDashboardUpdate = this.handleDashboardUpdate.bind(this)
+		this.handleResourcesUpdate = this.handleResourcesUpdate.bind(this)
+		this.state = {
+			dashboardState: {},
+			resourcesState: {}
+		}
 	}
-	componentDidMount() {
-		const test = new Dates(new Date('11/17/2016'),new Date('05/12/1992'))
-		console.log(test.diff())
+	handleAppUpdate() {}
+	handleDashboardUpdate(updatedDashboardState) {
+		// console.log('in handleDashboardUpdate',updatedDashboardState);
+		this.setState({
+			dashboardState: updatedDashboardState
+		})
+	}
+	handleResourcesUpdate(updatedResourcesState) {
+		this.setState({
+			resourcesState: updatedResourcesState
+		})
 	}
 	render() {
-		return(
-			<pre>
-				{this.state.output}
-			</pre>
+		const resourcesItems = resources.concat(groceries)
+		return (
+		  	<Router history={browserHistory}>
+		  		<Route path='/' component={App}>
+		  			<IndexRoute 
+		  				component={Dashboard}
+		  				appData={{groceries}}
+		  				dashboardUpdateCallback={this.handleDashboardUpdate}
+		  			/>
+		  			<Route 
+		  				path='resources'
+		  				component={Resources}
+		  				appData={resourcesItems}
+		  				resourcesUpdateCallback={this.handleResourcesUpdate}
+		  			/>
+		  		</Route>
+		  	</Router>
+		)
+	}
+}
+
+class App extends Component {
+	constructor(props) {
+		super(props)
+	}
+	render() {
+		return (
+			<div id='app'>
+				<Nav/>
+				<main className="row" >
+	        		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+	        		<div className="col s12">
+		            	<section className="row">
+		            		<div className="col s12">
+		            			<h3 className="text-center">{'Homebase'}</h3>
+		            		</div>
+		            	</section>
+						{this.props.children}
+					</div>
+				</main>
+			</div>
 		)
 	}
 }
 
 ReactDOM.render(
-  <Dashboard />,
+  <AppRouter />,
   document.getElementById('root')
 );
 
-ReactDOM.render(
-	<MobileMenu />,
-	document.getElementById('mobile-menu')
-);
+// ReactDOM.render(
+// 	<MobileMenu />,
+// 	document.getElementById('mobile-menu')
+// );

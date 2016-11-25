@@ -25,7 +25,7 @@ class GroceryList extends Component {
 		const _this = this;
 		get('/api/get.php',{query:{collection:'groceryList'}}, function(res) {
 			_this.setState({
-				openItems: res.data === undefined ? groceries : res.data
+				openItems: res.data === undefined ? _this.props.data : res.data
 			});
 			_this.props.GroceryListUpdateCallback({
 				completedGroceryItems: _this.state.completedItems,
@@ -57,15 +57,15 @@ class GroceryList extends Component {
 			  updatedTrashedItems = this.state.trashedItems, //remove from this, add to handleTrashChange
 			  updatedOpenItems = this.state.openItems;
 		let changedItem;
-		console.log('changed item in List:', itemID)
+		// console.log('changed item in List:', itemID)
 		updatedOpenItems.forEach((openItem,index,openItemArray) => {
-			console.log(openItem.id,itemID)
+			// console.log(openItem.id,itemID)
 			if ( openItem.id === itemID ) {
-				console.log('=============')
-				console.log('openItemArray',openItemArray)
-				console.log('openItem',openItem)
-				console.log('itemID',itemID)
-				console.log('=============')
+				// console.log('=============')
+				// console.log('openItemArray',openItemArray)
+				// console.log('openItem',openItem)
+				// console.log('itemID',itemID)
+				// console.log('=============')
 				let { id, count, title, unit } = openItem;
 				changedItem = {
 					id,
@@ -104,19 +104,19 @@ class GroceryList extends Component {
 	handleFormSubmit(addedGroceryItem) {
 		const updatedOpenItems = this.state.openItems;
 		// addedGroceryItem['id'] = `grocery-list-item-${updatedOpenItems.length-1}`
-		console.log('addedGroceryItem',addedGroceryItem)
+		// console.log('addedGroceryItem',addedGroceryItem)
 		updatedOpenItems.push(addedGroceryItem);
 		this.setState({
 			openItems: updatedOpenItems
 		})
-		console.log(this.state)
+		// console.log(this.state)
 		this.props.GroceryListUpdateCallback({
 			completedGroceryItems: this.state.completedItems,
 			openGroceryItems: this.state.openItems
 		});
 	}
 	handleReopen(reopenedItem,location) {
-		console.log(reopenedItem)
+		// console.log(reopenedItem)
 		const updatedComputedItems = this.state[`${location}Items`],
 			  updatedOpenItems = this.state.openItems,
 			  { id, count, title, unit } = reopenedItem;
@@ -180,7 +180,7 @@ class GroceryList extends Component {
 		});
 	}
 	render() {
-		console.log(this.state.openItems)
+		// console.log(this.state.openItems)
 		const _this = this,
 			  GroceryListItems = this.state.openItems.map(function(openItem,i,arr) {
 				if ( openItem ) {

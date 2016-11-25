@@ -52,14 +52,14 @@ class ToDoList extends Component {
 			todoItems: todoItems
 		});
 
-		console.log(this.state.todoItems)
+		// console.log(this.state.todoItems)
 
 		if ( this.todoList.length > 0 ) {
 			todoItemArr = [].slice.call(this.todoList.children);
 
 			todoItemArr.forEach(function(el,i) {
 				if ( el.id === deletedItemID ) {
-					console.log('deleting %s',deletedItemID);
+					// console.log('deleting %s',deletedItemID);
 					el.remove();
 				} 
 			});
