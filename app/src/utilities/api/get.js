@@ -3,7 +3,7 @@ import Params from '../params'
 
 export default function get(url='/api/get.php',options={query:''},callback=()=>false) {
 	let queryString;
-	if (options.query !== 'string') {
+	if (typeof options.query !== 'string') {
 		const params = new Params(options.query);
 		queryString = params.setup(options.query);
 	} else {

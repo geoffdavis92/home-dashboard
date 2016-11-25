@@ -5,6 +5,7 @@ import GroceryListForm from './GroceryList/GroceryListForm';
 import GroceryListItem from './GroceryList/GroceryListItem';
 import GroceryListCompleted from './GroceryList/GroceryListCompleted';
 import GroceryListTrash from './GroceryList/GroceryListTrash';
+import get from './utilities/api/get';
 // Placeholder data
 import { groceries } from './placeholder'
 // CSS
@@ -14,17 +15,24 @@ class GroceryList extends Component {
 	constructor() {
 		super();
 		this.state = {
-			openItems: groceries,
+			openItems: [],
 			completedItems: [],
 			trashedItems: [],
 			view: 'list'
 		};
 	};
 	componentDidMount() {
-		this.props.GroceryListUpdateCallback({
-			completedGroceryItems: this.state.completedItems,
-			openGroceryItems: this.state.openItems
-		});
+		const _this = this;
+		get('/api/get.php',{query:{collection:'groceryList'}}, function(res) {
+			_this.setState({
+				openItems: res.data === undefined ? groceries : res.data
+			});
+			_this.props.GroceryListUpdateCallback({
+				completedGroceryItems: _this.state.completedItems,
+				openGroceryItems: _this.state.openItems
+			});
+		})
+		
 	}
 	saveGroceryList(e) {
 		this.props.saveGroceryListCallback('test')
@@ -138,6 +146,10 @@ class GroceryList extends Component {
 				view: 'list'
 			});
 		}
+		this.props.GroceryListUpdateCallback({
+			completedGroceryItems: this.state.completedItems,
+			openGroceryItems: this.state.openItems
+		});
 	}
 	handleTrash(trashedItem,location) {
 		const updatedComputedItems = this.state[`${location}Items`], 
@@ -162,8 +174,13 @@ class GroceryList extends Component {
 				view: 'list'
 			});
 		}
+		this.props.GroceryListUpdateCallback({
+			completedGroceryItems: this.state.completedItems,
+			openGroceryItems: this.state.openItems
+		});
 	}
 	render() {
+		console.log(this.state.openItems)
 		const _this = this,
 			  GroceryListItems = this.state.openItems.map(function(openItem,i,arr) {
 				if ( openItem ) {

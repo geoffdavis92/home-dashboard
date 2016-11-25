@@ -29,6 +29,9 @@ class Diagnostics extends Component {
 					open: category.open.length,
 					completed: category.completed.length
 				}, per = parseFloat( (100 / (num.open + num.completed)) * num.completed );
+				if (isNaN(per)) {
+					per = '0'
+				}
 				return (
 					<tr key={i}>
 						<td>{category.title}</td>

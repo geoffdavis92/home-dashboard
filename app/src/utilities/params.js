@@ -38,7 +38,7 @@ export default class Params {
 		if (this.type === 'object') {
 			let queryString = '?'
 			for (let key in this.params) {
-				queryString += `${this.params.key}&`
+				queryString += `${key}=${this.params[key]}&`
 			}
 			return queryString.replace(/\&$/,'');
 		} else {

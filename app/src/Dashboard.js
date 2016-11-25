@@ -62,11 +62,12 @@ class Dashboard extends Component {
 		})
 	}
 	handleGroceryListUpdate(updatedGroceryListState) {
+		const { completedGroceryItems, openGroceryItems } = updatedGroceryListState;
 		this.setState({
 			groceryListItems: {
 				title: 'GroceryList',
-				completed: updatedGroceryListState.completedGroceryItems,
-				open: updatedGroceryListState.openGroceryItems
+				completed: completedGroceryItems,
+				open: openGroceryItems
 			}
 		});
 	}

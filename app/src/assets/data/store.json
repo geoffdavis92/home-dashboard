@@ -13,13 +13,6 @@
 						"isOpen": true,
 						"title": "Potato",
 						"unit": "pound"
-					},
-					{
-						"count": 2,
-						"id": "cereal-2-boxes",
-						"isOpen": true,
-						"title": "Cereal",
-						"unit": "boxes"
 					}
 				]
 			}
