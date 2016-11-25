@@ -1,19 +1,9 @@
-// @flow
 /**
  * @author Geoff Davis <geoffdavis92@gmail.com>
  * @name params
  * @description Get URL parameters
  * @return {Object} Key/value pairs of URL parameters
  */
-// export function params(paramString='') {
-//     var p = paramString !== '' ? window.location.search : paramString 
-//     	q = p.split('?')[1].split('&'),
-//         o = {};
-//     for (k in q) {
-//         o[q[k].split('=')[0]] = decodeURIComponent(q[k].split('=')[1].replace(/\+/g,' '));
-//     }
-//     return o;
-// }
 
 export default class Params {
 	params: string|Object;

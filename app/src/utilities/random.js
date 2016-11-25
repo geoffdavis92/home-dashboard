@@ -1,7 +1,12 @@
+/**
+ * @function
+ * @name randomDates
+ * @return {[type]} [description]
+ */
 export function randomDates() {
-	let a=[0,1,2,3,4];
-	a.forEach(function(el,i,arr) {
-		arr[i] = new Date((Math.ceil(Math.random() * 12))+'-'+(Math.ceil(Math.random() * 30))+'-2016')
-	});
-	return a;
+	const array = [];
+	for (let i=0;i<5;i++) {
+		array.push(new Date((Math.ceil(Math.random() * 12)+1)+'-'+(Math.ceil(Math.random() * 30))+'-2016'))
+	}
+	return array;
 }
