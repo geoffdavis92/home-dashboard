@@ -1,6 +1,9 @@
+// Libraries
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, Link } from 'react-router'
 
+// Views
 import Dashboard from './Dashboard';
 import MobileMenu from './MobileMenu';
 

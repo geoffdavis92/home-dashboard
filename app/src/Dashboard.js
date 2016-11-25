@@ -1,4 +1,4 @@
-// React
+// Libraries
 import React, { Component } from 'react';
 // Components
 import ToDoList from './ToDoList.js';
