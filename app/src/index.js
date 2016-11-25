@@ -2,17 +2,19 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router'
-
 // Views
 import Dashboard from './views/Dashboard';
 import Resources from './views/Resources';
-
 // Global Components
 import Nav from './Nav';
+import DateSetAnalytics from './analytics/Dates'
 import './css/critical.css';
 
 // Placeholder Data
-import { groceries, resources } from './placeholder'
+import { groceries, resources, dates } from './placeholder'
+
+window.DSA = DateSetAnalytics;
+window._dates = dates;
 
 class AppRouter extends Component {
 	constructor(props) {

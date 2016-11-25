@@ -35,8 +35,22 @@ module.exports = {
 			count: 1,
 			unit: 'quart',
 			isOpen: true,
-			timestamp: new Date('11-25-2016')//Fri Nov 25 2016 01:04:24 GMT-0600 (CST)')
+			timestamp: new Date('Nov 11 2016'),
+			durations: [
+				[new Date('Nov 1 2016'), new Date('Nov 10 2016')],
+				[new Date('Oct 31 2016'), new Date('Nov 1 2016')],
+				[new Date('Oct 5 2016'), new Date('Oct 17 2016')],
+				[new Date('Sep 19 2016'), new Date('Sep 22 2016')],
+				[new Date('Sep 1 2016'), new Date('Sep 3 2016')],
+			]
 		}
 	],
-	diagnostics: []
+	diagnostics: [],
+	dates: [
+		new Date('May 12 2016'),
+		new Date('May 13 2016'),
+		new Date('May 15 2016'),
+		new Date('May 16 2016'),
+		new Date('May 18 2016')
+	]
 }
