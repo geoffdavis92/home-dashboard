@@ -103,13 +103,10 @@ class GroceryList extends Component {
 	}
 	handleFormSubmit(addedGroceryItem) {
 		const updatedOpenItems = this.state.openItems;
-		// addedGroceryItem['id'] = `grocery-list-item-${updatedOpenItems.length-1}`
-		// console.log('addedGroceryItem',addedGroceryItem)
 		updatedOpenItems.push(addedGroceryItem);
 		this.setState({
 			openItems: updatedOpenItems
 		})
-		// console.log(this.state)
 		this.props.GroceryListUpdateCallback({
 			completedGroceryItems: this.state.completedItems,
 			openGroceryItems: this.state.openItems

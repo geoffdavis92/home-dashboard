@@ -18,8 +18,17 @@ export default function arrayAB (array:Array<mixed>, callback:Function) {
 	})
 }
 
-export function toDiffArray (abArray:Array<mixed>,diffArray:Array<mixed>) {
-	abArray.forEach((el) => {
+/**
+ * @function
+ * @name  toDiffArray
+ * @description [description]
+ * @param  {[type]} sourceArray:Array<mixed>   [description]
+ * @param  {[type]} diffArray:Array<mixed> [description]
+ * @return {[type]}                        [description]
+ */
+export function toDiffArray (sourceArray:Array<mixed>,diffArray:Array<mixed>) {
+	sourceArray.forEach((el) => {
+		// console.log(el)
 		diffArray.push(el[0]-el[1]);
 	})
 	return diffArray

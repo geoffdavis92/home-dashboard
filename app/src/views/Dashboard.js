@@ -13,10 +13,7 @@ class Dashboard extends Component {
 		this.handleTDLFormSubmission = this.handleTDLFormSubmission.bind(this);
 		this.handleTDLItemDeletion = this.handleTDLItemDeletion.bind(this);
 		this.handleGroceryListUpdate = this.handleGroceryListUpdate.bind(this);
-		this.handleGroceryListSave = this.handleGroceryListSave.bind(this);
 		this.state = {
-			// trash: {
-			// ToDoItems: [],
 			todoItems: {
 				title: 'ToDoItems',
 				completed: [],
@@ -27,7 +24,6 @@ class Dashboard extends Component {
 				completed: [],
 				open: []
 			}
-			// }
 		}
 	}
 	componentDidMount() {
@@ -50,7 +46,6 @@ class Dashboard extends Component {
 		this.props.route.dashboardUpdateCallback(this.state)
 	}
 	handleTDLItemDeletion(completedItemTitle,completedItemID) {
-		// console.log(completedItemTitle,completedItemID)
 		let updatedToDoItemCompleted = this.state.todoItems.completed,
 			updatedToDoItemOpen = this.state.todoItems.open,
 			completedItem = updatedToDoItemOpen.filter(todo => todo.id === completedItemID)[0];
@@ -64,9 +59,6 @@ class Dashboard extends Component {
 				completed: updatedToDoItemCompleted,
 				open: updatedToDoItemOpen
 			}
-			// trash: {
-			// 	ToDoItems: [...this.state.trash.ToDoItems,{title:deletedItemTitle,id:deletedItemID}]
-			// }
 		})
 		this.props.route.dashboardUpdateCallback(this.state)
 	}
@@ -80,9 +72,6 @@ class Dashboard extends Component {
 			}
 		});
 		this.props.route.dashboardUpdateCallback(this.state)
-	}
-	handleGroceryListSave() {
-		console.log('Save GroceryList')
 	}
     render() {
     	const { groceries } = this.props.route.appData
@@ -102,7 +91,6 @@ class Dashboard extends Component {
 							<GroceryList 
 								data={groceries}
 								GroceryListUpdateCallback={this.handleGroceryListUpdate}
-								saveGroceryListCallback={this.handleGroceryListSave}
 							/>
 						</div>
 		            </div>

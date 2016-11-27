@@ -27,14 +27,19 @@ class AppRouter extends Component {
 			resourcesState: {}
 		}
 	}
+	componentDidMount() {
+		this.setState({
+			dashboardState: {}
+		})
+	}
 	handleAppUpdate() {}
 	handleDashboardUpdate(updatedDashboardState) {
-		// console.log('in handleDashboardUpdate',updatedDashboardState);
 		this.setState({
 			dashboardState: updatedDashboardState
 		})
 	}
 	handleResourcesUpdate(updatedResourcesState) {
+		console.log('Resources State updated on <AppRouter/>',updatedResourcesState)
 		this.setState({
 			resourcesState: updatedResourcesState
 		})

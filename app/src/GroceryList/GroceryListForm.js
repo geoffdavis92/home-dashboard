@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 class GroceryListForm extends Component {
 	constructor(props,context) {
-		super(props,context);
+		super();
+		this.handleFormSubmit = this.handleFormSubmit.bind(this)
 	}
 	handleFormSubmit(e) {
 		e.preventDefault();
@@ -20,7 +21,7 @@ class GroceryListForm extends Component {
 	}
 	render() {
 		return (
-			<form id="grocery-list-form" onSubmit={this.handleFormSubmit.bind(this)} ref={ref=>this.glForm=ref}>
+			<form id="grocery-list-form" onSubmit={this.handleFormSubmit} ref={ref=>this.glForm=ref}>
 				<div className="input-field col s12">
 		          <input id="grocery_item_title" type="text" className="validate" placeholder="Grocery item" ref={ref=>this.gliTitle=ref}/>
 		          <input id="grocery_item_count" type="number" className="validate" placeholder="count" ref={ref=>this.gliCount=ref}/>

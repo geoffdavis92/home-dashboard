@@ -42,20 +42,12 @@ export default class DateSetAnalytics {
 	 */
 	reduce() {
 		try {
-			const diffArr = []
-			/*this.reducedValue = this.sortedSet.reduce((curr:number|Date,next:Date) => {
-				if (typeof curr === 'object') {
-					return curr.getTime() + next.getTime();
-				} else {
-					return curr + next.getTime();
-				}
-			})
-			return this.reducedValue*/
+			const diffArr = [];
+			console.log(this.sortedSet)
 			arrayAB(this.sortedSet,(abSet) => {
 				toDiffArray(abSet,diffArr)
 			});
-			// let reducedValue = (diffArr.reduce((curr,next) => curr + next) / diffArr.length)
-			return this.averageDiff = ((diffArr.reduce((curr,next) => curr + next) / diffArr.length) / 1000 / 60 / 60 / 24)
+			return this.averageDiff = msToDays((diffArr.reduce((curr,next) => curr + next) / diffArr.length))
 		} catch(e) {
 			throw {
 				error: 'Calling reduce() before sort()',
@@ -65,4 +57,10 @@ export default class DateSetAnalytics {
 	}
 }
 
-export class DateDiff {}
+export function msToDays(milliseconds) {
+	return (milliseconds / 1000 / 60 / 60 / 24)
+}
+
+export function getEstimatedDiff(startDate:Date,averageDuration:number) {
+	return (msToDays(startDate.getTime()) + averageDuration)
+}
