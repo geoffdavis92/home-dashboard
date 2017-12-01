@@ -20,13 +20,10 @@ module.exports = {
 			atoms: path.resolve(__dirname, "client/components/atoms"),
 			molecules: path.resolve(__dirname, "client/components/molecules"),
 			organisms: path.resolve(__dirname, "client/components/organisms"),
-			utilities: path.resolve(__dirname, "utilities"),
-			views: path.resolve(__dirname, "client/views")
+			views: path.resolve(__dirname, "client/views"),
+			layouts: path.resolve(__dirname, "client/views/layouts"),
+			utilities: path.resolve(__dirname, "client/utilities")
 		}
-	},
-	externals: {
-		react: "React",
-		"react-dom": "ReactDOM"
 	},
 	module: {
 		rules: [

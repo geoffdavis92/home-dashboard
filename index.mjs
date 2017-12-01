@@ -23,7 +23,7 @@ server.use("/static", express.static("server/assets"));
 server.use(bodyParser.json());
 
 // Setup routes
-server.get("/", (req, res) => {
+server.get("*", (req, res) => {
 	res.render("index", {});
 });
 
