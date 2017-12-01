@@ -1,11 +1,9 @@
 {
   "name": "home-dashboard",
   "version": "0.0.0",
-  "description": "Dashboard to follow tasks resources throughout your home.",
-  "main": "app/src/index.js",
+  "description": "Dashboard to follow tasks & resources throughout your home.",
+  "main": "index.mjs",
   "scripts": {
-    "setup": "bash setup.bash;",
-    "init": "create-react-app ./app && cd app/src && mkdir css && mv *.css css/ && cd -;",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -18,10 +16,5 @@
   "author": "geoff davis <geoffdavis92@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-imagemin": "^1.0.1",
-    "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0"
   }
 }
