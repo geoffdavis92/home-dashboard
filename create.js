@@ -40,13 +40,6 @@ const parsePath = type => {
 		componentPath.length
 	);
 
-	// console.log({
-	// 	componentType,
-	// 	componentPath,
-	// 	componentTypeName,
-	// 	filesToWrite
-	// });
-
 	filesToWrite.forEach(file => {
 		// Write component file(s)
 		fs.writeFileSync(

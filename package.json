@@ -4,28 +4,27 @@
 	"description": "Dashboard to follow tasks & resources throughout your home.",
 	"main": "index.mjs",
 	"scripts": {
-		"prettier": "./node_modules/.bin/prettier ./{*js,*json,{server,app}/**/*.{ts,tsx,js,jsx,mjs}} --write",
+		"atom": "node create.js -a",
+		"molecule": "node create.js -m",
+		"organism": "node create.js -o",
+		"prettier":
+			"./node_modules/.bin/prettier ./{*js,*json,{server,app}/**/*.{ts,tsx,mjs},stories/{.,**}/*js} --write",
 		"start": "node --experimental-modules index.mjs",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"w": "./node_modules/.bin/webpack",
 		"webpack": "yarn run w -- --watch",
-		"webpack:build": "NODE_ENV=production yarn run w"
+		"webpack:build": "NODE_ENV=production yarn run w",
+		"storybook": "start-storybook -p 6006",
+		"build-storybook": "build-storybook"
 	},
-	"keywords": [
-		"home",
-		"dashboard",
-		"react",
-		"react-router",
-		"redux"
-	],
+	"keywords": ["home", "dashboard", "react", "react-router", "redux"],
 	"author": "geoff davis <geoffdavis92@gmail.com>",
 	"license": "MIT",
-	"dependencies": {
-		"babel": "^6.23.0",
-		"babel-loader": "^7.1.2",
-		"babel-preset-react": "^6.24.1",
-		"styled-components": "^2.2.4"
+	"prettier": {
+		"tabWidth": 2,
+		"useTabs": true
 	},
+	"dependencies": {},
 	"devDependencies": {
 		"@types/react": "^16.0.25",
 		"@types/react-dom": "^16.0.3",
@@ -40,12 +39,12 @@
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
 		"react-router-dom": "^4.2.2",
+		"styled-components": "^2.2.4",
 		"ts-loader": "^3.2.0",
 		"typescript": "^2.6.2",
-		"webpack": "^3.9.1"
-	},
-	"prettier": {
-		"tabWidth": 2,
-		"useTabs": true
+		"webpack": "^3.9.1",
+		"@storybook/react": "^3.2.16",
+		"@storybook/addon-actions": "^3.2.16",
+		"@storybook/addon-links": "^3.2.16"
 	}
 }
