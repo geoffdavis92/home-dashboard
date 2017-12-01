@@ -1,20 +1,50 @@
 {
-  "name": "home-dashboard",
-  "version": "0.0.0",
-  "description": "Dashboard to follow tasks & resources throughout your home.",
-  "main": "index.mjs",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "home",
-    "dashboard",
-    "react",
-    "react-router",
-    "redux"
-  ],
-  "author": "geoff davis <geoffdavis92@gmail.com>",
-  "license": "MIT",
-  "devDependencies": {
-  }
+	"name": "home-dashboard",
+	"version": "0.0.0",
+	"description": "Dashboard to follow tasks & resources throughout your home.",
+	"main": "index.mjs",
+	"scripts": {
+		"prettier": "./node_modules/.bin/prettier ./{*js,*json,{server,app}/**/*.{ts,tsx,js,jsx,mjs}} --write",
+		"start": "node --experimental-modules index.mjs",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"w": "./node_modules/.bin/webpack",
+		"webpack": "yarn run w -- --watch",
+		"webpack:build": "NODE_ENV=production yarn run w"
+	},
+	"keywords": [
+		"home",
+		"dashboard",
+		"react",
+		"react-router",
+		"redux"
+	],
+	"author": "geoff davis <geoffdavis92@gmail.com>",
+	"license": "MIT",
+	"dependencies": {
+		"babel": "^6.23.0",
+		"babel-loader": "^7.1.2",
+		"babel-preset-react": "^6.24.1"
+	},
+	"devDependencies": {
+		"@types/react": "^16.0.25",
+		"@types/react-dom": "^16.0.3",
+		"@types/react-router-dom": "^4.2.3",
+		"body-parser": "^1.18.2",
+		"ejs": "^2.5.7",
+		"enzyme": "^3.2.0",
+		"express": "^4.16.2",
+		"jest": "^21.2.1",
+		"jest-enzyme": "^4.0.1",
+		"prettier": "^1.8.2",
+		"react": "^16.2.0",
+		"react-dom": "^16.2.0",
+		"react-router-dom": "^4.2.2",
+		"ts-loader": "^3.2.0",
+		"typescript": "^2.6.2",
+		"webpack": "^3.9.1"
+	},
+	"prettier": {
+		"tabWidth": 2,
+		"useTabs": true
+	}
 }
