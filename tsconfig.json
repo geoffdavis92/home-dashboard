@@ -3,28 +3,19 @@
 		"allowJs": true,
 		"baseUrl": "./",
 		"jsx": "react",
+		"lib": ["dom", "es7"],
 		"module": "es6",
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
 		"outDir": "assets/js/",
 		"paths": {
-			"atoms/*": [
-				"client/components/atoms/*"
-			],
-			"molecules/*": [
-				"client/components/molecules/*"
-			],
-			"organisms/*": [
-				"client/components/organisms/*"
-			],
-			"utilities/*": [
-				"client/utilities/*"
-			]
+			"atoms/*": ["client/components/atoms/*"],
+			"molecules/*": ["client/components/molecules/*"],
+			"organisms/*": ["client/components/organisms/*"],
+			"utilities/*": ["client/utilities/*"]
 		},
 		"sourceMap": true,
 		"target": "es5"
 	},
-	"exclude": [
-		"node_modules"
-	]
+	"exclude": ["node_modules"]
 }
