@@ -14,9 +14,9 @@ module.exports = {
 	devtool: "inline-source-map",
 	resolve: {
 		enforceExtension: false,
-		extensions: [".ts", ".tsx", ".js", ".json"],
+		extensions: [".ts", ".tsx", ".mjs", ".js", ".json"],
 		alias: {
-			components: path.resolve(__dirname, "client/components"),
+			// components: path.resolve(__dirname, "client/components"),
 			atoms: path.resolve(__dirname, "client/components/atoms"),
 			molecules: path.resolve(__dirname, "client/components/molecules"),
 			organisms: path.resolve(__dirname, "client/components/organisms"),

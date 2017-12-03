@@ -7,8 +7,7 @@
 		"atom": "node create.js -a",
 		"molecule": "node create.js -m",
 		"organism": "node create.js -o",
-		"prettier":
-			"./node_modules/.bin/prettier ./{*js,*json,{server,app}/**/*.{ts,tsx,mjs},stories/{.,**}/*js} --write",
+		"prettier": "./node_modules/.bin/prettier ./{*js,*json,{server,app}/**/*.{ts,tsx,mjs},stories/{.,**}/*js} --write",
 		"start": "node --experimental-modules index.mjs",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"w": "./node_modules/.bin/webpack",
@@ -17,7 +16,13 @@
 		"storybook": "start-storybook -p 6006",
 		"build-storybook": "build-storybook"
 	},
-	"keywords": ["home", "dashboard", "react", "react-router", "redux"],
+	"keywords": [
+		"home",
+		"dashboard",
+		"react",
+		"react-router",
+		"redux"
+	],
 	"author": "geoff davis <geoffdavis92@gmail.com>",
 	"license": "MIT",
 	"prettier": {
@@ -26,10 +31,14 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
+		"@storybook/addon-actions": "^3.2.16",
+		"@storybook/addon-links": "^3.2.16",
+		"@storybook/react": "^3.2.16",
 		"@types/react": "^16.0.25",
 		"@types/react-dom": "^16.0.3",
 		"@types/react-router-dom": "^4.2.3",
 		"body-parser": "^1.18.2",
+		"chalk": "^2.3.0",
 		"ejs": "^2.5.7",
 		"enzyme": "^3.2.0",
 		"express": "^4.16.2",
@@ -42,9 +51,6 @@
 		"styled-components": "^2.2.4",
 		"ts-loader": "^3.2.0",
 		"typescript": "^2.6.2",
-		"webpack": "^3.9.1",
-		"@storybook/react": "^3.2.16",
-		"@storybook/addon-actions": "^3.2.16",
-		"@storybook/addon-links": "^3.2.16"
+		"webpack": "^3.9.1"
 	}
 }

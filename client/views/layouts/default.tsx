@@ -1,4 +1,8 @@
 import * as React from "react";
-// import
+import Header from "molecules/Header";
+import Container from "atoms/Container";
 
-export default props => <main>{props.children}</main>;
+export default props => <>
+	<Header />
+	<Container {...props} />
+</>;

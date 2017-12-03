@@ -1,4 +1,6 @@
 import * as React from "react";
-import * as styled from "styled-components";
+import { withGlobalStyles } from "utilities/themes";
 
-export default props => <p>Container Component</p>;
+export default withGlobalStyles(({ children, ...rest }) => (
+	<main {...rest}>{children}</main>
+));

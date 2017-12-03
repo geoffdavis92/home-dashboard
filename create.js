@@ -6,9 +6,8 @@ const srcFiles = ["[file].tsx"];
 const testFiles = ["[file].ts"];
 
 const parseArgs = args => {
-	const [type, ...dirNames] = args.filter(
-		a => a.search(/^\//) !== 0 //(a.search(/^\-[amo]$/g) >= 0 || a.search(/^\//) !== 0 ? a : false)
-	);
+	const [type, ...dirNames] = args.filter(a => a.search(/^\//) !== 0);
+	if (dirNames.length === 0) process.exit;
 	return [type, dirNames];
 };
 
@@ -42,6 +41,7 @@ const parsePath = type => {
 
 	filesToWrite.forEach(file => {
 		// Write component file(s)
+		if (!fs.existsSync(componentPath)) fs.mkdirSync(componentPath);
 		fs.writeFileSync(
 			`${componentPath}/${srcFiles[0].replace(/\[file\]/, file)}`,
 			`import * as React from 'react'
@@ -51,10 +51,12 @@ export default props => <p>${file} Component</p>`
 		);
 
 		// Write component test file(s)
+		const testFilesPath = `${path.resolve(__dirname, "client/__tests__")}/${
+			componentTypeName
+		}`;
+		if (!fs.existsSync(testFilesPath)) fs.mkdirSync(testFilesPath);
 		fs.writeFileSync(
-			`${path.resolve(__dirname, "client/__tests__")}/${
-				componentTypeName
-			}/${testFiles[0].replace(/\[file\]/, file)}`,
+			`${testFilesPath}/${testFiles[0].replace(/\[file\]/, file)}`,
 			""
 		);
 	});
