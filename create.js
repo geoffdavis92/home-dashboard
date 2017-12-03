@@ -45,7 +45,7 @@ const parsePath = type => {
 		fs.writeFileSync(
 			`${componentPath}/${srcFiles[0].replace(/\[file\]/, file)}`,
 			`import * as React from 'react'
-import * as styled from 'styled-components'
+import styled from 'styled-components'
 
 export default props => <p>${file} Component</p>`
 		);
