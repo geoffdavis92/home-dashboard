@@ -1,2 +1,2 @@
 import * as React from "react";
-import { withGlobalStyles } from "utilities/themes";
+import { withGlobalStyles } from "utilities/helpers";

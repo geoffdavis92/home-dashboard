@@ -1,14 +1,11 @@
 import * as React from "react";
-import { withGlobalStyles, withTypography } from "utilities/themes";
+import { withGlobalStyles, withTypography } from "../../utilities/helpers";
 
-const Container = withGlobalStyles(({ children, ...rest }) => (
-	<main {...rest}>{children}</main>
-));
-
+const GlobalContainer = withGlobalStyles(props => <main {...props} />);
 const Aside = withTypography(props => <aside {...props} />);
 const Main = withTypography(props => <main {...props} />);
 const Section = withTypography(props => <section {...props} />);
 
-export default Container;
+export default GlobalContainer;
 
 export { Aside, Main, Section };
