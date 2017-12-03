@@ -3,7 +3,7 @@ import { routeLogger } from "./middleware/index";
 
 const BaseRouter = express.Router();
 
-BaseRouter.get("/", routeLogger, (req, res) => {
+BaseRouter.get(["/", "/dashboard"], routeLogger, (req, res) => {
 	res.render("index", {
 		fn: {
 			addStyles: function addStyles() {
