@@ -15,12 +15,12 @@ module.exports = {
 	resolve: {
 		extensions: [".ts", ".tsx", ".js"],
 		alias: {
-			atoms: path.resolve("../", "client/components/atoms"),
-			molecules: path.resolve("../", "client/components/molecules"),
-			organisms: path.resolve("../", "client/components/organisms"),
-			views: path.resolve("../", "client/views"),
-			layouts: path.resolve("../", "client/views/layouts"),
-			utilities: path.resolve("../", "client/utilities")
+			atoms: "../client/components/atoms",
+			molecules: "../client/components/molecules",
+			organisms: "../client/components/organisms",
+			views: "../client/views",
+			layouts: "../client/views/layouts",
+			utilities: "../client/utilities"
 		}
 	},
 	module: {
