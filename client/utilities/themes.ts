@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 const colors = {
 	black: "#343434",
-	white: "#f9f7f5"
+	white: "#f7f6f5",
+	gray: "#aaa"
 };
 
 const measurements = {
@@ -27,9 +28,22 @@ const globalStyles = {
 const withGlobalStyles = (component: Function) => styled(component)`
 	background-color: ${colors.white};
 	color: ${colors.black};
-	font-size: ${measurements.fontSize}${units.px};
+	font-family: "Roboto", sans-serif;
+	font-size: ${measurements.fontSize}px;
 	margin: 0;
 	padding: 0;
 `;
 
-export { colors, measurements, units, globalStyles, withGlobalStyles };
+const withTypography = (component: Function) => styled(component)`
+	font-family: "Roboto", sans-serif;
+	font-size: ${measurements.fontSize}px;
+`;
+
+export {
+	colors,
+	measurements,
+	units,
+	globalStyles,
+	withGlobalStyles,
+	withTypography
+};
