@@ -1,10 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
-import Downshift from "downshift";
 
-import TextInput from "atoms/TextInput";
-
-const StyledTextInput = styled(TextInput)`
+const StyledTextInput = styled("input")`
 	display: block;
 	width: 100%;
 `;
