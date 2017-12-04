@@ -6,7 +6,8 @@ import { linkTo } from "@storybook/addon-links";
 import { Welcome } from "@storybook/react/demo";
 
 import Button from "atoms/Button";
-import GlobalContainer, { Aside, Main, Section } from "atoms/Container";
+import GlobalContainer, { Aside, Main, Section, Grid } from "atoms/Container";
+import Panel, { Card } from "atoms/Panel";
 
 storiesOf("Welcome", module).add("to Storybook", () => (
 	<Welcome showApp={linkTo("Button")} />
@@ -116,4 +117,34 @@ storiesOf("atoms/Container", module)
 				<p>May deprecate</p>
 			</Aside>
 		</GlobalContainer>
+	))
+	.add("Grid", () => (
+		<GlobalContainer>
+			<Grid template_columns="repeat(4,calc(25% - .5em))" column_gap=".5em">
+				<p style={{ textAlign: "center" }}>Grid Item 1</p>
+				<p style={{ textAlign: "center" }}>Grid Item 2</p>
+				<p style={{ textAlign: "center" }}>Grid Item 3</p>
+				<p style={{ textAlign: "center" }}>Grid Item 4</p>
+				<p style={{ textAlign: "center" }}>Grid Item 5</p>
+				<p style={{ textAlign: "center" }}>Grid Item 6</p>
+				<p style={{ textAlign: "center" }}>Grid Item 7</p>
+				<p style={{ textAlign: "center" }}>Grid Item 8</p>
+				<p style={{ textAlign: "center" }}>Grid Item 9</p>
+				<p style={{ textAlign: "center" }}>Grid Item 10</p>
+				<p style={{ textAlign: "center" }}>Grid Item 11</p>
+				<p style={{ textAlign: "center" }}>Grid Item 12</p>
+			</Grid>
+		</GlobalContainer>
+	));
+
+storiesOf("atoms/Panel", module)
+	.add("default", () => (
+		<Panel>
+			<p>Inside a panel</p>
+		</Panel>
+	))
+	.add("card", () => (
+		<Card>
+			<p>Inside a card</p>
+		</Card>
 	));
