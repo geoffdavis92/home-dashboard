@@ -20,8 +20,8 @@ server.set("view engine", "html");
 server.set("views", "server/views");
 
 // Setup middleware
-server.use("/", BaseRouter);
 server.use("/static", express.static("server/assets"));
+server.use("/", BaseRouter);
 server.use(bodyParser.json());
 
 // Start server
