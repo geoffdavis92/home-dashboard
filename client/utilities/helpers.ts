@@ -5,10 +5,20 @@ import { modes, colors, measurements } from "./themes";
 /**
  * CSS Prop helpers
  */
+const mapResponsiveValues = (mediaQueryObject: Object, propertyName: string) =>
+	Object.keys(mediaQueryObject)
+		.map(
+			(key: string) =>
+				key !== "0"
+					? `@media only screen and (min-width: ${key}px) { 	
+						${propertyName}: ${mediaQueryObject[key]};
+					}`
+					: `${propertyName}: ${mediaQueryObject[key]};`
+		)
+		.join("\n");
 const grid: Function = (name, defaultValue): Function => props => {
-	let value = props[name];
-	if (!value && typeof defaultValue === "undefined") return "";
-	if (!value) value = defaultValue;
+	let value: string | Object = props[name];
+	const valueHasResponsiveStyles: boolean = typeof value === "object";
 	/**
 	 * Grid has many grid-*-* properties; underscores should be used in props
 	 * and string keys to keep this syntax uniform and terse.
@@ -16,7 +26,26 @@ const grid: Function = (name, defaultValue): Function => props => {
 	 * Underscores should be replaced with dashes when style string literal
 	 * is returned.
 	 */
-	return `grid-${name.replace(/\_/g, "-")}: ${value};`;
+	const computedCSSProperty = `grid-${name.replace(/\_/g, "-")}`;
+
+	if (!value && typeof defaultValue === "undefined") return "";
+	if (!value) value = defaultValue;
+
+	if (valueHasResponsiveStyles) {
+		// const mappedResponsiveValues = Object.keys(value)
+		// 	.map(
+		// 		(key: string) =>
+		// 			key !== "0"
+		// 				? `@media only screen and (min-width: ${key}px) {
+		// 				${computedCSSProperty}: ${value[key]};
+		// 			}`
+		// 				: `${computedCSSProperty}: ${value[key]};`
+		// 	)
+		// 	.join("\n");
+		return mapResponsiveValues(value, computedCSSProperty);
+	} else {
+		return `${computedCSSProperty}: ${value};`;
+	}
 };
 
 /**
