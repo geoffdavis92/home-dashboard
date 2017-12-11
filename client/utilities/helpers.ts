@@ -5,7 +5,10 @@ import { modes, colors, measurements } from "./themes";
 /**
  * CSS Prop helpers
  */
-const mapResponsiveValues = (mediaQueryObject: Object, propertyName: string) =>
+const mapResponsiveValues: Function = (
+	mediaQueryObject: Object,
+	propertyName: string
+): string =>
 	Object.keys(mediaQueryObject)
 		.map(
 			(key: string) =>
@@ -16,6 +19,7 @@ const mapResponsiveValues = (mediaQueryObject: Object, propertyName: string) =>
 					: `${propertyName}: ${mediaQueryObject[key]};`
 		)
 		.join("\n");
+
 const grid: Function = (name, defaultValue): Function => props => {
 	let value: string | Object = props[name];
 	const valueHasResponsiveStyles: boolean = typeof value === "object";
@@ -54,14 +58,21 @@ const grid: Function = (name, defaultValue): Function => props => {
 const getThemeStyles: Function = (props: Object): string => {
 	const propKeys: string[] = [...Object.keys(props)];
 	const [themeStyle]: string[] = propKeys
-		.filter(key => key !== "link")
+		.filter(key => key !== "link" && key !== "outline")
 		.map(
-			key => (propKeys.includes("link") ? modes.link[key] : modes.standard[key])
+			key =>
+				propKeys.includes("link")
+					? modes.link[key]
+					: propKeys.includes("outline")
+						? modes.outline[key]
+						: modes.standard[key]
 		);
 	if (propKeys.length === 0 || !themeStyle) {
 		return propKeys.includes("link")
 			? modes.link.default
-			: modes.standard.default;
+			: propKeys.includes("outline")
+				? modes.outline.default
+				: modes.standard.default;
 	}
 	return themeStyle;
 };
@@ -69,19 +80,15 @@ const getThemeStyles: Function = (props: Object): string => {
 /**
  * Style-setting higher-order-functions
  */
-const withTypography = (component: Function) => styled(component)`
+const withGlobalStyles = (componentType: string) => styled(componentType)`
 	* {
 		font-family: "Roboto", sans-serif;
 		font-size: ${measurements.fontSize}px;
 	}
-`;
-const withGlobalStyles = (component: Function) => styled(
-	withTypography(component)
-)`
 	background-color: ${colors.white};
 	color: ${colors.black};
 	margin: 0;
 	padding: 0;
 `;
 
-export { grid, getThemeStyles, withGlobalStyles, withTypography };
+export { grid, getThemeStyles, withGlobalStyles };

@@ -3,6 +3,7 @@ import styled from "styled-components";
 const colors = {
 	black: "#343434",
 	white: "#f7f6f5",
+	whiteLight: "#fcfbfa",
 	gray: "#aaa",
 	grayDark: "#666",
 	grayLight: "#ccc",
@@ -17,12 +18,13 @@ const colors = {
  * the call to getThemeStyles in the JSX
  * template literal.
  */
+const addons = {
+	boxShadow: () => `box-shadow: 0 1px 1px ${colors.grayLight}`
+};
+
 const modes = {
 	standard: {
-		default: `
-	background-color: ${colors.black};
-	border-color: ${colors.black};
-	color: ${colors.white}`,
+		default: ``,
 		disabled: `
 	background-color: ${colors.grayLight};
 	border-color: ${colors.grayLight};
@@ -63,6 +65,29 @@ const modes = {
 	background-color: ${colors.white};
 	border-color: ${colors.white};
 	color: ${colors.green}`
+	},
+	outline: {
+		default: `
+	background-color: ${colors.white};
+	border-color: ${colors.black};
+	color: ${colors.black}`,
+		disabled: `
+	background-color: ${colors.white};
+	border-color: ${colors.grayLight};
+	color: ${colors.grayLight};
+	cursor: not-allowed`,
+		danger: `
+	background-color: ${colors.white};
+	border-color: ${colors.red};
+	color: ${colors.red}`,
+		warn: `
+	background-color: ${colors.white};
+	border-color: ${colors.yellow};
+	color: ${colors.yellow}`,
+		success: `
+	background-color: ${colors.white};
+	border-color: ${colors.green};
+	color: ${colors.green}`
 	}
 };
 
@@ -77,4 +102,4 @@ const units = {
 	px: "px"
 };
 
-export { colors, measurements, modes, units };
+export { addons, colors, measurements, modes, units };
