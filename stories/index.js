@@ -5,9 +5,11 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 import { Welcome } from "@storybook/react/demo";
 
-import Button from "atoms/Button";
+import Button from "atoms/Button.tsx";
 import GlobalContainer, { Aside, Main, Section, Grid } from "atoms/Container";
 import Panel, { Card } from "atoms/Panel";
+
+import TypeAhead from "molecules/TypeAhead";
 
 storiesOf("Welcome", module).add("to Storybook", () => (
 	<Welcome showApp={linkTo("Button")} />
@@ -148,3 +150,25 @@ storiesOf("atoms/Panel", module)
 			<p>Inside a card</p>
 		</Card>
 	));
+
+storiesOf("molecules/TypeAhead", module).add("default", () => (
+	<GlobalContainer>
+		<TypeAhead
+			options={[
+				"alpha",
+				"bravo",
+				"charlie",
+				"delta",
+				"echo",
+				"foxtrot",
+				"gulf",
+				"hotel",
+				"india",
+				"juliet",
+				"kilo",
+				"lima",
+				"mike"
+			]}
+		/>
+	</GlobalContainer>
+));
