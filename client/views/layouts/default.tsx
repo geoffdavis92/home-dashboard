@@ -25,11 +25,10 @@ export default class Default extends React.Component<
 		}));
 	}
 	render() {
-		const { children, pageID } = this.props;
+		const { children } = this.props;
 		return (
 			(!this.state.componentHasError && (
 				<DefaultGrid
-					id={`page_${pageID}`}
 					template_areas={{
 						0: `"sidebar" "mainBody"`,
 						768: `none`

@@ -21,11 +21,9 @@ export default class SubmissionForm extends React.Component<
 		this.formID = "SubmissionForm";
 		this.submit = this.submit.bind(this);
 	}
-	// componentDidMount() {}
 	submit(e) {
 		e.preventDefault();
 		const { inputValue } = this.Typeahead.Downshift.state;
-		const { categoryCreated } = this.Typeahead.state;
 		const formValues = Array.from(
 			document.querySelectorAll(`#${this.formID} [name]`)
 		)
@@ -36,10 +34,10 @@ export default class SubmissionForm extends React.Component<
 			.filter(val => val);
 		const typeaheadValue = { category: inputValue };
 
-		categoryCreated && Object.assign(typeaheadValue, { categoryCreated });
+		if (!this.props.categories.includes(inputValue)) {
+			Object.assign(typeaheadValue, { categoryCreated: new Date(Date.now()) });
+		}
 		formValues.push(typeaheadValue);
-
-		console.log(formValues);
 	}
 	render() {
 		return (
