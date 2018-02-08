@@ -7,18 +7,19 @@ import Container from "atoms/Container";
 const AppLink = styled(NavLink)`
 	padding: 0.25em;
 	text-align: center;
+
 	@media only screen and (min-width: 768px) {
-		padding: 0.5em;
-		text-align: left;
+		padding: 0.33em;
+		/* text-align: left; */
 	}
 `;
 
 const AppLinks = props =>
 	props.routes.map(({ path, label, ...restProps }) => (
 		<span key={path}>
-			<NavLink to={path} {...restProps}>
+			<AppLink to={path} {...restProps}>
 				{label}
-			</NavLink>
+			</AppLink>
 		</span>
 	));
 

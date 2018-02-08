@@ -1,10 +1,15 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { colors, measurements } from "../../utilities/themes";
 import { getThemeStyles } from "../../utilities/helpers";
+import { colors, measurements } from "../../utilities/themes";
+import { Button } from "../../utilities/types";
 
-const Button = styled("button")`
+const Button: Function = ({ children, ...restProps }): JSX.Element => (
+	<button {...restProps}>{children}</button>
+);
+
+const StyledButton = styled(Button)`
 	appearance: none;
 	background-color: ${colors.black};
 	border-color: ${colors.black};
@@ -18,4 +23,4 @@ const Button = styled("button")`
 	${getThemeStyles};
 `;
 
-export default Button;
+export default StyledButton;

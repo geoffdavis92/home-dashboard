@@ -17,7 +17,7 @@ const StyledPanel = styled("article")`
 
 const StyledCard = styled(StyledPanel)`
 	${getThemeStyles};
-	${({ shadow }) => (shadow ? addons.boxShadow() : "")};
+	${({ shadow }) => (shadow ? addons.boxShadow : "")};
 	/* width: 100%; */
 	/* max-width: 400px; */
 `;

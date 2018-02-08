@@ -7,10 +7,13 @@ import { AppLinks } from "molecules/Nav";
 const AppNav = styled(GridWrapper("nav"))`
 	a {
 		color: #ca1211;
+		display: block;
 		text-decoration: none;
+		&:focus {
+			color: blue;
+			outline: 2px dashed blue;
+		}
 	}
-	/* grid-template-columns: repeat(1, 66%);
-	grid-row-gap: 0.5em; */
 `;
 
 const StyledAside = styled("aside")`
@@ -34,9 +37,9 @@ const Sidebar = props => (
 					{ path: "/", label: "Home" },
 					{ path: "/dashboard", label: "Dashboard" },
 					{ path: "/profile", label: "Profile" },
-					{ path: "/settings", label: "Settings" },
-					{ path: "/careers", label: "Careers" },
-					{ path: "/About", label: "About" }
+					{ path: "/settings", label: "Settings" }
+					// { path: "/careers", label: "Careers" },
+					// { path: "/About", label: "About" }
 				]}
 			/>
 		</AppNav>

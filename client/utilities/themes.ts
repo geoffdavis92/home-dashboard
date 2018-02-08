@@ -19,7 +19,7 @@ const colors = {
  * template literal.
  */
 const addons = {
-	boxShadow: () => `box-shadow: 0 1px 1px ${colors.grayLight}`
+	boxShadow: `box-shadow: 0 1px 1px ${colors.grayLight}`
 };
 
 const modes = {
