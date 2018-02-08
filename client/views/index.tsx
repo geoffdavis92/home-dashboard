@@ -20,7 +20,7 @@ const routes = [
 ];
 
 export default class App extends React.Component {
-	state: { Home: object } = { Home: {} };
+	state: { home: object; dashboard: object } = { home: {}, dashboard: {} };
 	render() {
 		return (
 			<Router>
