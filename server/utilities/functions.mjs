@@ -6,7 +6,7 @@ const { green, red, white } = chalk;
 // extract text variants
 const { bold, inverse, underline } = chalk;
 
-const text = content => text(content);
+const text = content => white(content);
 const notify = content => green(content);
 const error = content => red(content);
 

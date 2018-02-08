@@ -1,7 +1,9 @@
 import express from "express";
-import { routeLogger } from "./middleware/index";
+import { routeLogger } from "./middleware/";
+import database from "./middleware/database";
 
 const BaseRouter = express.Router();
+const v1APIRouter = express.Router();
 
 BaseRouter.get("*", routeLogger, (req, res) => {
 	res.render("index", {
@@ -21,4 +23,17 @@ BaseRouter.get("*", routeLogger, (req, res) => {
 	});
 });
 
+v1APIRouter.get("/shoppingList", routeLogger, async (req, res) => {
+	const { results } = await database.query(`SHOW DATABASES;`);
+	res.json(results.map(r => r.Database));
+});
+
+v1APIRouter.get("/categories", routeLogger, async (req, res) => {
+	const { results } = await database.query(`SELECT * FROM categories WHERE 1;`);
+	console.log(results);
+	res.json(results.map(({ title }) => title));
+});
+
 export default BaseRouter;
+
+export { v1APIRouter };

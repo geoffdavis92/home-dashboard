@@ -1,3 +1,4 @@
+import { addItem } from "./database";
 import routeLogger from "./routeLogger";
 
-export { routeLogger };
+export { addItem, routeLogger };
