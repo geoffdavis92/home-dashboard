@@ -36,6 +36,28 @@ const databaseSetup = (async () => {
 		) AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
 	`);
 
+	// Check for units table
+	const { results: unitExistsResults } = await database.query(`
+		SELECT count(*)
+		FROM information_schema.tables
+		WHERE table_schema = 'home_dashboard'
+		AND table_name = 'units'
+	`);
+
+	// Log table creation
+	if (!unitExistsResults[0]["count(*)"]) {
+		console.log(notify(`Database: Creating TABLE ${bold("units")}`));
+	}
+
+	// Create units table
+	const createUnitsQuery = await database.query(`CREATE TABLE IF NOT EXISTS units (
+			id INT(5) NOT NULL AUTO_INCREMENT,
+			title VARCHAR(500),
+			create_date TIMESTAMP,
+			PRIMARY KEY(id)
+		) AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+	`);
+
 	// Check for shopping_list table
 	const { results: homeDashboardExistsResults } = await database.query(`
 		SELECT count(*)
@@ -54,9 +76,10 @@ const databaseSetup = (async () => {
 		CREATE TABLE IF NOT EXISTS shopping_list (
 			id INT(5) NOT NULL AUTO_INCREMENT,
 			category INT(5),
-			note VARCHAR(10000),
+			unit INT(5),
 			count TINYINT(2),
-			price DECIMAL(6,2),
+			price DOUBLE(6,2),
+			note VARCHAR(10000),			
 			create_date TIMESTAMP,
 			expire_date DATETIME,
 			PRIMARY KEY(id)

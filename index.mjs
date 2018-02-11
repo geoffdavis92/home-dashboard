@@ -9,7 +9,6 @@ import ejs from "ejs";
 // Local modules
 import settings from "./server/settings";
 import BaseRouter, { v1APIRouter } from "./server/routes";
-import database from "./server/middleware/database";
 import { green, bold } from "./server/utilities/functions";
 
 // Init express
@@ -21,10 +20,10 @@ server.set("view engine", "html");
 server.set("views", "server/views");
 
 // Setup middleware
+server.use(bodyParser.json());
 server.use("/static", express.static("server/assets"));
 server.use("/api/v1", v1APIRouter);
 server.use("/", BaseRouter);
-server.use(bodyParser.json());
 
 // Start server
 console.log(
