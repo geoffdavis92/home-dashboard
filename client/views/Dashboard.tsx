@@ -35,7 +35,7 @@ export default class Dashboard extends React.Component<
 				justify_content="center"
 			>
 				<Card outline>
-					<SubmissionForm categories={this.state.categories} />
+					<SubmissionForm categories={this.state.categories} units={[]} />
 				</Card>
 			</DashboardGrid>
 		);

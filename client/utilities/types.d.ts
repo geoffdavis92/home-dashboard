@@ -38,5 +38,24 @@ type APIOptions = {
 };
 
 // Functions
+type RequestOptions = {
+	method?: string;
+	headers?: Headers;
+	body?: string;
+};
 
-export { APIOptions, Button, DynamicString, LocalItem, PageState };
+type RequestResponse = {
+	error?: boolean;
+	success?: boolean;
+	message: string;
+};
+
+export {
+	APIOptions,
+	Button,
+	DynamicString,
+	LocalItem,
+	PageState,
+	RequestOptions,
+	RequestResponse
+};

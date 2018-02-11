@@ -77,6 +77,20 @@ export default class Typeahead extends React.Component<
 					selectedItem,
 					highlightedIndex
 				}) => {
+					const AddItemComponent = (
+						<TypeaheadOption
+							{...getItemProps({
+								item: inputValue,
+								onChange: e =>
+									this.setState(prevState => ({
+										categoryCreated: true
+									}))
+							})}
+							highlighted={highlightedIndex === 0}
+						>
+							<i style={{ color: colors.grayDark }}>Add "{inputValue}"</i>
+						</TypeaheadOption>
+					);
 					return (
 						<TypeaheadWrapper
 							{...getRootProps({
@@ -86,49 +100,30 @@ export default class Typeahead extends React.Component<
 							<Input type="text" {...getInputProps()} inset />
 							{isOpen ? (
 								<TypeaheadSelection>
-									{options.length > 0 ? (
-										(() => {
-											const filteredOptions = options.filter(
-												option =>
-													inputValue === option ||
-													option
-														.toLowerCase()
-														.includes(inputValue.toLowerCase())
-											);
-											return filteredOptions.length > 0 ? (
-												filteredOptions.map((item, index) => (
-													<TypeaheadOption
-														key={item}
-														{...getItemProps({
-															item
-														})}
-														highlighted={highlightedIndex === index}
-													>
-														{item}
-													</TypeaheadOption>
-												))
-											) : (
-												<TypeaheadOption
-													{...getItemProps({
-														item: inputValue,
-														onChange: e =>
-															this.setState(prevState => ({
-																categoryCreated: true
-															}))
-													})}
-													highlighted={highlightedIndex === 0}
-												>
-													<i style={{ color: colors.grayDark }}>
-														Add "{inputValue}"
-													</i>
-												</TypeaheadOption>
-											);
-										})()
-									) : (
-										<p>
-											<i>No options available</i>
-										</p>
-									)}
+									{options.length > 0
+										? (() => {
+												const filteredOptions = options.filter(
+													option =>
+														inputValue === option ||
+														option
+															.toLowerCase()
+															.includes(inputValue.toLowerCase())
+												);
+												return filteredOptions.length > 0
+													? filteredOptions.map((item, index) => (
+															<TypeaheadOption
+																key={item}
+																{...getItemProps({
+																	item
+																})}
+																highlighted={highlightedIndex === index}
+															>
+																{item}
+															</TypeaheadOption>
+														))
+													: AddItemComponent;
+											})()
+										: AddItemComponent}
 								</TypeaheadSelection>
 							) : null}
 						</TypeaheadWrapper>

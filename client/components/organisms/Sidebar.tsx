@@ -35,11 +35,9 @@ const Sidebar = props => (
 			<AppLinks
 				routes={[
 					{ path: "/", label: "Home" },
-					{ path: "/dashboard", label: "Dashboard" },
-					{ path: "/profile", label: "Profile" },
-					{ path: "/settings", label: "Settings" }
-					// { path: "/careers", label: "Careers" },
-					// { path: "/About", label: "About" }
+					{ path: "/dashboard", label: "Dashboard" }
+					//{ path: "/profile", label: "Profile" },
+					//{ path: "/settings", label: "Settings" }
 				]}
 			/>
 		</AppNav>

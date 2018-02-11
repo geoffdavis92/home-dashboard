@@ -7,6 +7,7 @@ import Home from "./Home";
 import Dashboard from "./Dashboard";
 
 const { BrowserRouter: Router, Route, Link } = ReactRouter;
+
 const routes = [
 	{
 		path: "/",
